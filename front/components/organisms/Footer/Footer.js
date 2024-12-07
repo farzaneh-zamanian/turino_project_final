@@ -39,7 +39,7 @@ function Footer() {
     <footer className='px-12 md:px-40 mx-auto'>
       {/* Customer Satisfaction Section */}
       <section>
-        <div className='flex flex-col items-center gap-6 py-10 border border-slate-200 md:flex-row '>
+        <div className='flex flex-col items-center gap-6 mt-20 py-20 border-solid border border-x-0 border-slate-200 md:flex-row '>
           <SatisfactionItem
             imageSrc="/images/icons/satisfact.svg"
             title="بصرفه ترین قیمت"
