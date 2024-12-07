@@ -1,8 +1,14 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Head from "next/head"; // Import Head from next/head
 
 
 
+// FONT CONFIG
+const yekanFont = localFont({
+  src: "../public/fonts/Yekan.woff2",
+});
+ 
 export const metadata = {
   title: "Turino Next App",
   description: "Tourism tour booking"
@@ -12,11 +18,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+           <Head>
+        {/* Add the viewport meta tag */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      <body  className={`${yekanFont.className} text-textColor overflow-x-hidden antialiased`}>
+      {children}
+    </body>
+    </html >
   );
 }
