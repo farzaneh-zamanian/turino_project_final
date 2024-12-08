@@ -18,6 +18,8 @@ module.exports = {
         "textLightColor": "rgba(125, 125, 125, 1)",
         "headingsColor": "rgb(40, 40, 40, 1)",
         "titleColor": "rgba(89, 89, 89, 1)",
+        "borderColor": '#E0E0E0',
+        "priceColor": "#009ECA",
       },
       screens: {
         '2xl': '1536px',

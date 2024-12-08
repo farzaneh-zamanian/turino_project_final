@@ -13,62 +13,34 @@ function Card({ tour }) {
 
       return (
             <>
-                  <div class="group ml-[2rem] relative bg-white">
+                  <div class="ml-[2rem] relative bg-white border border-solid rounded-md  border-borderColor p-[1rem]">
                         <img src={image} alt="Tour" className=" w-full rounded-md  object-cover group-hover:opacity-75 md:aspect-square lg:aspect-auto lg:h-80 transition-default" />
                         <div className="mt-4 flex flex-col justify-between">
-                              <div className='border border-solid pb-[1rem] border-x-0 border-t-0 border-primary'>
+                              <div className='border border-solid pb-[1rem] border-x-0 border-t-0 border-borderColor'>
                                     <h3 className="text-[1.5rem] font-semibold text-gray-700">
-                                          <Link href={`tour/${id}`}>
-                                                <span aria-hidden="true" class="absolute inset-0"></span>
+                                          {/* <Link href={`tour/${id}`} > */}
+                                          <Link href={`/tour/${id}`} >
+                                                {/* it will cover the entire area of the title, making it easier for users to click on the title */}
+                                                <span aria-hidden="true" className="absolute inset-0">
+
+                                                </span>
                                                 {title}
+
                                           </Link>
                                     </h3>
                                     <p className="mt-1 text-[1.2rem] text-gray-500">{destName}</p>
                               </div>
                               <div className='flex justify-between pt-[1rem] '>
-                                    <p className="text-[1.3rem] font-medium text-gray-900">{price}تومان</p>
-                                     <Button label="رزرو" status="reservation" />
-                                     {/* <Button label="رزرو" type="reservation" onClick={handleReservation}/> */}
+                                    <Button label="رزرو" status="reservation" />
+                                    <p className="text-[1.3rem] font-medium text-gray-900">{price} تومان</p>
+                                    {/* <Button label="رزرو" type="reservation" onClick={handleReservation}/> */}
 
                               </div>
                         </div>
                   </div>
             </>
 
-            // <div className="flex flex-cols  rounded-sm bg-blue-300 ">
-            //       <img
-            //             src={image}
-            //             alt={title}
-            //             className=" w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto md:aspect-square lg:h-80"
-            //       />
-            //       <div className='flex flex-cols '>
-            //             <h3>{title}</h3>
-            //             <p>options</p>
 
-            //       </div>
-            //       <div>
-            //             <Button label="رزرو" type="reservation" />
-            //             <span>{price}تومان</span>
-
-
-            //       </div>
-            // </div>
-
-
-
-
-            // <div className="mt-4 flex justify-between">
-            //       <div>
-            //             <h3 className="text-sm text-gray-700">
-            //                   <Link href={`/tours/${id}`}>
-            //                         <span aria-hidden="true" className="absolute inset-0"></span>
-            //                         {title}
-            //                   </Link>
-            //             </h3>
-            //             <p className="mt-1 text-sm text-gray-500">{tour.color}</p>
-            //       </div>
-            //       <p className="text-sm font-medium text-gray-900">${price}</p>
-            // </div> 
       );
 
 }
