@@ -20,6 +20,8 @@ module.exports = {
         "titleColor": "rgba(89, 89, 89, 1)",
         "borderColor": '#E0E0E0',
         "priceColor": "#009ECA",
+        "accentButtonColor": ' rgba(216, 255, 225, 1)',
+
       },
       screens: {
         '2xl': '1536px',

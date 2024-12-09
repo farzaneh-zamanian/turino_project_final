@@ -9,14 +9,15 @@ import clsx from 'clsx';
 // <button className="text-primary h-[4.1rem] border-solid px-8 rounded-[0.5rem]   ">انصراف</button>
 
 
-function Button({ label, status }) {
+function Button({ label, status, onClick }) {
   return (
-    <button className={clsx(
-      "text-white bg-primary flex justify-center font-normal transition-default hover:opacity-75",
+    <button onClick={onClick} className={clsx(
+      " flex items-center justify-center font-normal transition-default hover:opacity-75",
       {
-        'w-full rounded-[1.6rem] text-[1.5rem]': status === 'search',
-        'h-[2.9rem] w-[9.9rem] rounded-[0.4rem] text-[1.5rem]': status === 'reservation',
-        'w-full rounded-[0.6rem] text-[1.4]  ': status === 'submit',
+        'w-full rounded-[1.6rem] text-[1.5rem]  text-white  bg-primary': status === 'search',
+        'h-[2.9rem] w-[9.9rem] rounded-[0.4rem] text-white  bg-primary text-[1.5rem]': status === 'reservation',
+        'w-full rounded-[0.6rem] text-[1.4rem] text-white  bg-primary ': status === 'submit',
+        'w-[232px] h-[58px] rounded-[1.6rem] text-[2rem]  bg-accentButtonColor text-primary  ': status === 'accent',
       }
     )}>{label}</button>
   )

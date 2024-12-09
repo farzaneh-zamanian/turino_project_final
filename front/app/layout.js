@@ -11,8 +11,13 @@ const yekanFont = localFont({
 });
 
 export const metadata = {
-  title: "Turino app",
-  description: "Tourism tour booking"
+  title: {
+    absolute:"",
+    default:"Turino App",
+    template:"Turino App | %s ",
+  },
+  description: "Tourism tour booking",
+  keywords: "tour, offroad,travel",
 
 };
 

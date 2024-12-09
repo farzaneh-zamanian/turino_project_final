@@ -6,10 +6,10 @@ import clsx from 'clsx';
 
 
 const MobileHeader = ({ links, isMenuOpen, setIsMenuOpen }) => {
-  const pathname = usePathname();
+  const pathname = usePathname();//hook for get path
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
-
+ 
   return (
     <>
       {/* Mobile Header */}

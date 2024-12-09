@@ -1,6 +1,6 @@
 import Button from "@/components/atoms/Button";
 import { api } from "@/configs/api";
-import { getInsuranceStatus, getVehicleNameInPersian } from "@/utils";
+import { getInsuranceStatus, getOriginNameInPersian, getVehicleNameInPersian } from "@/utils";
 import Image from "next/image";
 import React from "react";
 
@@ -50,7 +50,7 @@ async function TourDetails(props) {
     },
   ];
   const featuresDesktop = [
-    { icon: "/images/icons/entrance.svg", label: "مبدا", value: entrance },
+    { icon: "/images/icons/entrance.svg", label: "مبدا", value:getOriginNameInPersian(entrance)},
     {
       icon: "/images/icons/departureDate.svg",
       label: "تاریخ رفت",
