@@ -41,18 +41,18 @@ function Footer() {
       <section>
         <div className='flex flex-col items-center gap-6 mt-20 py-20 border-solid border border-x-0 border-slate-200 md:flex-row '>
           <SatisfactionItem
-            imageSrc="/images/icons/satisfact.svg"
+            imageSrc="/icons/satisfact.svg"
             title="بصرفه ترین قیمت"
             description="بصرفه ترین و ارزان ترین قیمت تور را از ما بخواهید."
           
           />
           <SatisfactionItem
-            imageSrc="/images/icons/support.svg"
+            imageSrc="/icons/support.svg"
             title="پشتیبانی"
             description="پشتیبانی و همراهی 24 ساعته در تمامی مراحل سفر شما."
           />
           <SatisfactionItem
-            imageSrc="/images/icons/satisfact.svg"
+            imageSrc="/icons/satisfact.svg"
             title="رضایت کاربران"
             description="رضایت بیش از 10هزار کاربر از تور های ما."
           />
@@ -92,11 +92,11 @@ function Footer() {
             </div>
 
             <div className='flex gap-4 md:grid md:grid-cols-3 md:gap-10'>
-              <Image src="/images/icons/aira.svg" width={35} height={38} alt="Aira" />
-              <Image src="/images/icons/ecunion.svg" width={35} height={38} alt="EC Union" />
-              <Image src="/images/icons/passenger-rights.svg" width={35} height={38} alt="Passenger Rights" />
-              <Image src="/images/icons/samandehi.svg" width={35} height={38} alt="Samandehi" />
-              <Image src="/images/icons/state-airline.svg" width={35} height={38} alt="State Airline" />
+              <Image src="/icons/ecunion.svg" width={35} height={38} alt="EC Union" />
+              <Image src="/icons/passenger-rights.svg" width={35} height={38} alt="Passenger Rights" />
+              <Image src="/icons/samandehi.svg" width={35} height={38} alt="Samandehi" />
+              <Image src="/icons/state-airline.svg" width={35} height={38} alt="State Airline" />
+              <Image src="/icons/aira.svg" width={35} height={38} alt="Aira" />
             </div>
           </div>
         </div>

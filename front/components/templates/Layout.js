@@ -1,5 +1,5 @@
-import Header from '../organisms/Header/Header'
-import Footer from '../organisms/Footer/Footer'
+import Header from '../ui/organisms/Header/Header'
+import Footer from '../ui/organisms/Footer/Footer'
 import Image from 'next/image'
 
 function Layout({ children }) {

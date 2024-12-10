@@ -1,6 +1,11 @@
-import Button from "@/components/atoms/Button";
-import { api } from "@/configs/api";
-import { getInsuranceStatus, getOriginNameInPersian, getVehicleNameInPersian } from "@/utils";
+import IconDescriptionCard from "@/components/ui/molecules/IconDescriptionCard";
+import ReservationCard from "@/components/ui/molecules/ReservationCard";
+import { api } from "@/core/configs/api";
+import {
+  getInsuranceStatus,
+  getOriginNameInPersian,
+  getVehicleNameInPersian,
+} from "@/core/utils/hepler";
 import Image from "next/image";
 import React from "react";
 
@@ -28,51 +33,55 @@ async function TourDetails(props) {
   } = data;
 
   const options = [
-    { icon: "/images/icons/user-tick.svg", label: "تورلیدر از مبدا" },
-    { icon: "/images/icons/map.svg", label: "برنامه سفر" },
-    { icon: "/images/icons/medal-star.svg", label: "تضمین کیفیت" },
+    { icon: "/icons/user-tick.svg", label: "تورلیدر از مبدا" },
+    { icon: "/icons/map.svg", label: "برنامه سفر" },
+    { icon: "/icons/medal-star.svg", label: "تضمین کیفیت" },
   ];
   const features = [
     {
-      icon: "/images/icons/bus.svg",
+      icon: "/icons/bus.svg",
       label: "حمل و نقل",
       value: getVehicleNameInPersian(fleetVehicle),
     },
     {
-      icon: "/images/icons/users-profile.svg",
+      icon: "/icons/users-profile.svg",
       label: "ظرفیت",
       value: `حداکثر ${availableSeats} نفر`,
     },
     {
-      icon: "/images/icons/security.svg",
+      icon: "/icons/security.svg",
       label: "بیمه",
       value: getInsuranceStatus(insurance),
     },
   ];
   const featuresDesktop = [
-    { icon: "/images/icons/entrance.svg", label: "مبدا", value:getOriginNameInPersian(entrance)},
     {
-      icon: "/images/icons/departureDate.svg",
+      icon: "/icons/entrance.svg",
+      label: "مبدا",
+      value: getOriginNameInPersian(entrance),
+    },
+    {
+      icon: "/icons/departureDate.svg",
       label: "تاریخ رفت",
       value: startDate,
     },
     {
-      icon: "/images/icons/returnDate.svg",
+      icon: "/icons/returnDate.svg",
       label: " تاریخ برگشت ",
       value: endDate,
     },
     {
-      icon: "/images/icons/bus.svg",
+      icon: "/icons/bus.svg",
       label: "حمل و نقل",
       value: getVehicleNameInPersian(fleetVehicle),
     },
     {
-      icon: "/images/icons/users-profile.svg",
+      icon: "/icons/users-profile.svg",
       label: "ظرفیت",
       value: `حداکثر ${availableSeats} نفر`,
     },
     {
-      icon: "/images/icons/security.svg",
+      icon: "/icons/security.svg",
       label: "بیمه",
       value: getInsuranceStatus(insurance),
     },
@@ -110,24 +119,19 @@ async function TourDetails(props) {
           <div className="flex justify-between md:hidden">
             {features.map(({ icon, label, value }, index) => (
               <div key={index} className="flex flex-col">
-                <div className="flex items-center gap-[1rem]">
-                  <img
-                    src={icon}
-                    className="w-[1.6rem] h-[1.6rem]"
-                    alt={label}
-                  />
-                  <p className="text-[1.6rem]">{label}</p>
-                </div>
+                <IconDescriptionCard label={label} icon={icon} />
                 <p>{value}</p>
               </div>
             ))}
           </div>
 
           {/* Action */}
-          <div className="flex items-center justify-between">
-            <Button label="رزرو و خرید" status="reservation" />
-            <p className="text-priceColor">{price} تومان</p>
-          </div>
+          <ReservationCard
+            label="رزرو و خرید "
+            status="reservation"
+            price={price}
+            classNames="text-priceColor"
+          />
         </div>
       </div>
       {/* desktop Features */}
@@ -135,10 +139,7 @@ async function TourDetails(props) {
         {featuresDesktop.map(({ icon, label, value }, index) => (
           <>
             <div key={index} className="flex flex-col ">
-              <div className="flex items-center gap-[1rem]">
-                <img src={icon} className="w-[1.6rem] h-[1.6rem]" alt={label} />
-                <p className="text-[1.6rem]">{label}</p>
-              </div>
+              <IconDescriptionCard label={label} icon={icon} />
               <p>{value}</p>
             </div>
             {index < featuresDesktop.length - 1 && (

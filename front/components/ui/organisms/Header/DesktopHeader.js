@@ -37,7 +37,7 @@ const DesktopHeader = ({ links }) => {
       {/* Registration Section */}
       <div className="md:flex border border-solid border-primary px-5 rounded-xl">
         <Link href="/" className='text-primary flex'>
-          <Image src="/images/icons/user.svg" width={24} height={24} />
+          <Image src="/icons/user.svg" width={24} height={24} />
           <span>ورود</span>
         </Link>
         <span className='px-2 text-primary'>|</span>

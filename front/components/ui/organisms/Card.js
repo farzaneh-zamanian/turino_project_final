@@ -2,14 +2,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import Button from '../atoms/Button';
+import ReservationCard from '../molecules/ReservationCard';
 
 function Card({ tour }) {
       const { id, origin: { originId, name }, destination: { id: destId, name: destName }, startDate, endDate,
             title, fleetVehicle, price, availableSeats, insuranc, options, image } = tour
-      // <Button label="جستجو" status="search" />
-      // <Button label="رزرو" status="reservation" />
-      // <Button label="ارسال کد تایید" status="submit" />
-      // <button className="text-primary h-[4.1rem] border-solid px-8 rounded-[0.5rem]   ">انصراف</button>
 
       return (
             <>
@@ -30,12 +27,12 @@ function Card({ tour }) {
                                     </h3>
                                     <p className="mt-1 text-[1.2rem] text-gray-500">{destName}</p>
                               </div>
-                              <div className='flex justify-between pt-[1rem] '>
+                              <ReservationCard label="رزرو" status="reservation" price={price} classNames="text-[1.3rem] font-medium text-gray-900" />
+                              {/* <div className='flex justify-between pt-[1rem] '>
                                     <Button label="رزرو" status="reservation" />
                                     <p className="text-[1.3rem] font-medium text-gray-900">{price} تومان</p>
-                                    {/* <Button label="رزرو" type="reservation" onClick={handleReservation}/> */}
 
-                              </div>
+                              </div> */}
                         </div>
                   </div>
             </>
