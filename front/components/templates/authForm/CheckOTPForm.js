@@ -1,17 +1,34 @@
 "use client";
 
 import OtpInput from "react18-input-otp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useCheckOtp } from "@/core/services/mutations";
 import { setCookie } from "@/core/utils/cookie";
 import Button from "@/components/ui/atoms/Button";
 
 function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
+  // Otp code status
   const [code, setCode] = useState("");
+//   Timer status
+  const [timer, setTimer] = useState(120); // 2 minutes in seconds
 
+  // useMutation
   const { isPending, mutate } = useCheckOtp();
 
+  useEffect(() => {
+    if (timer === 0) setStep(1); //Go back to step 1 after 2 minutes
+    const interval = setInterval(() => {
+      setTimer((timer) => timer - 1);
+    }, 1000); //decrease the timer
+
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, [timer]);
+
+
+
+
+  // Submit the form 
   const checkOtpHandler = (event) => {
     event.preventDefault();
 
@@ -33,9 +50,16 @@ function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
       }
     );
   };
-
+  // 
   const changeHandler = (otp) => {
     setCode(otp);
+  };
+
+  // Format the timer to mm:ss
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
   return (
@@ -43,14 +67,13 @@ function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
       <button onClick={onGoBack} className="flex items-end justify-end text-xl text-[2.2rem] font-semibold">
         <img src="/icons/arrow-left.svg" /></button>
 
-      <h4 className="text-xl text-center text-[2.2rem] font-semibold">کد تایید را وارد کنید.</h4>
+      <h4 className="text-center text-[1.6rem] font-semibold">کد تایید را وارد کنید.</h4>
       <form
         className="flex flex-col justify-end items-center  gap-10 flex-1"
         onSubmit={checkOtpHandler}
       >
-        <label className=" text-[1.6rem] font-light leading-[2.48rem]">شماره موبایل {mobile}</label>
+        <label className=" font-light leading-[2.48rem] text-[1.4rem]"> کد تایید به شماره {mobile} ارسال شد  </label>
         {/* otp div */}
-        {/* <div style={{ direction: "ltr" }}> */}
         <div style={{ direction: "ltr" }}>
           {/* otp input component */}
           <OtpInput
@@ -65,6 +88,10 @@ function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
               marginRight: "5px",
             }}
           />
+        </div>
+        {/* timer */}
+        <div className="text-center text-[1.4rem] font-light">
+          {timer > 0 ? `زمان باقی‌مانده: ${formatTime(timer)}` : "زمان منقضی شد"}
         </div>
         <Button label=" ورود به تورینو " status="submit" />
 

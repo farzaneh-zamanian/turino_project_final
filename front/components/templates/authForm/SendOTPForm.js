@@ -7,7 +7,7 @@ import { useSendOtp } from "@/core/services/mutations";
 import { isValidMobile } from "@/core/utils/validation";
 import Button from "@/components/ui/atoms/Button";
 
-function SendOTPForm({ mobile, setMobile, setStep,onClose }) {
+function SendOTPForm({ mobile, setMobile, setStep, onClose }) {
 
   const [error, setError] = useState("");//Error handling
 
@@ -27,8 +27,8 @@ function SendOTPForm({ mobile, setMobile, setStep,onClose }) {
       { mobile },
       {
         onSuccess: (data) => {
-          toast.success(data?.data?.message);//show success message
-          toast(data?.data?.code);//show otp code
+          // toast.success();//show success message
+          toast(` ${data?.data?.message} ${data?.data?.code}`);//show otp code 
           setStep(2);//go to the second action of check otp code
         },
         onError: (error) => {
@@ -40,8 +40,10 @@ function SendOTPForm({ mobile, setMobile, setStep,onClose }) {
 
   return (
     <div className="flex flex-col w-[358px] h-[362px] bg-white rounded-[20px] shadow-[0_4px_4px_-0px_rgba(0,0,0,0.25)] p-[4rem]">
-        <button className="text-left text-xl  text-[2.2rem] font-semibold"  onClick={onClose}> ×</button>
-      <h4 className="text-xl text-center text-[2.2rem] font-semibold">ورود به تورینو</h4>
+      <div className="flex justify-end" >
+        <button className=" text-[1.5rem] font-semibold bg-primary w-[1rem] h-[1rem] p-[1.5rem] rounded-md flex items-center justify-center" onClick={onClose}> ×</button>
+      </div>
+      <h4 className="text-center text-[2.3rem] font-semibold">ورود به تورینو</h4>
       {/* form of send mobile number */}
       <form
         className="flex flex-col justify-end gap-10 flex-1"
