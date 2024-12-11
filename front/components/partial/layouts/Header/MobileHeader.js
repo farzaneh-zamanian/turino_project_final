@@ -3,20 +3,22 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import AuthForm from '@/components/templates/authForm';
 
 
 const MobileHeader = ({ links, isMenuOpen, setIsMenuOpen }) => {
   const pathname = usePathname();//hook for get path
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
- 
+
   return (
     <>
       {/* Mobile Header */}
       <header className="block md:hidden px-[3rem] py-[1.5rem]">
         <div className='flex items-center justify-between'>
           <Image src="/images/icons/hamburgerMenu.png" width={25} height={20} onClick={toggleMenu} className="cursor-pointer" />
-          <Image src="/images/icons/signInBtn.png" width={30} height={25} className='rounded-2.5' />
+          {/* <Image src="/images/icons/signInBtn.png" width={30} height={25} className='rounded-2.5' /> */}
+          <AuthForm />
         </div>
       </header>
 

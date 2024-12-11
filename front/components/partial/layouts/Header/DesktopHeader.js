@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
+import AuthForm from '@/components/templates/authForm';
 
 const DesktopHeader = ({ links }) => {
   const pathname = usePathname();
@@ -35,14 +36,16 @@ const DesktopHeader = ({ links }) => {
       </nav>
 
       {/* Registration Section */}
-      <div className="md:flex border border-solid border-primary px-5 rounded-xl">
+      {/* <div className="md:flex border border-solid border-primary px-5 rounded-xl">
         <Link href="/" className='text-primary flex'>
-          <Image src="/icons/user.svg" width={24} height={24} />
+          <img src="/icons/user.svg" className='w-[24px]' />
           <span>ورود</span>
         </Link>
         <span className='px-2 text-primary'>|</span>
         <Link href="/" className='text-primary'>ثبت نام</Link>
-      </div>
+      </div> */}
+      <AuthForm/>
+
     </header>
   );
 };

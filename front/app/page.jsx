@@ -1,3 +1,5 @@
+import ModalContainer from "@/components/partial/container/ModalContainer";
+import AuthForm from "@/components/templates/authForm";
 import Card from "@/components/ui/organisms/Card";
 import { api } from "@/core/configs/api";
 export default async function Home() {
@@ -17,6 +19,7 @@ export default async function Home() {
   // data = data.splice(0, 10);
   return (
     <div>
+      <ModalContainer/>
       <div className="py-16  sm:py-24 ">
         <h2 className="text-[2rem] leading-[3rem] tracking-tight">همه تورها</h2>
 
