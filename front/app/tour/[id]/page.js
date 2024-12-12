@@ -13,13 +13,16 @@ async function TourDetails(props) {
   let data;
   const { params } = props;
 
-  try {
-    const response = await api.get(`/tour/${params.id}`);
-    data = await response.data;
-  } catch (error) {
-    console.error("Error fetching tour details:", error);
-    return <div>Error loading tour details.</div>; // Handle error gracefully
-  }
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour/${params.id}`);
+  data = await res.json();
+
+  // try {
+  //   const response = await api.get(`/tour/${params.id}`);
+  //   data = await response.data;
+  // } catch (error) {
+  //   console.error("Error fetching tour details:", error);
+  //   return <div>Error loading tour details.</div>; // Handle error gracefully
+  // }
   const {
     image,
     title,

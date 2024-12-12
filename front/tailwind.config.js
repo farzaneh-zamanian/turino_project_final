@@ -21,6 +21,8 @@ module.exports = {
         "borderColor": '#E0E0E0',
         "priceColor": "#009ECA",
         "accentButtonColor": ' rgba(216, 255, 225, 1)',
+        "IconBgColor":'#D9D9D5',
+        "hoverBgColor":'#F4F4F4',
 
       },
       screens: {

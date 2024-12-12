@@ -5,8 +5,10 @@ import Button from '../atoms/Button';
 import ReservationCard from '../molecules/ReservationCard';
 
 function Card({ tour }) {
-      const { id, origin: { originId, name }, destination: { id: destId, name: destName }, startDate, endDate,
-            title, fleetVehicle, price, availableSeats, insuranc, options, image } = tour
+      // const { id, origin: { originId, name }, destination: { id: destId, name: destName }, startDate, endDate,
+      //       title, fleetVehicle, price, availableSeats, insuranc, options, image } = tour
+      const { id, destination: { name: destName },
+            title, price, image } = tour
 
       return (
             <>

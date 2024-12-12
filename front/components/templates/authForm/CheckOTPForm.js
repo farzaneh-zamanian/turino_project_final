@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 import { useCheckOtp } from "@/core/services/mutations";
 import { setCookie } from "@/core/utils/cookie";
 import Button from "@/components/ui/atoms/Button";
+import { formatTheTime } from "@/core/utils/hepler";
 
 function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
   // Otp code status
   const [code, setCode] = useState("");
-//   Timer status
+  //   Timer status
   const [timer, setTimer] = useState(120); // 2 minutes in seconds
 
   // useMutation
@@ -55,17 +56,15 @@ function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
     setCode(otp);
   };
 
-  // Format the timer to mm:ss
-  const formatTime = (time) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-    return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  };
+
 
   return (
     <div className="flex flex-col w-[358px] h-[362px] bg-white rounded-[20px] shadow-[0_4px_4px_-0px_rgba(0,0,0,0.25)] p-[4rem]">
-      <button onClick={onGoBack} className="flex items-end justify-end text-xl text-[2.2rem] font-semibold">
-        <img src="/icons/arrow-left.svg" /></button>
+      <div className="flex justify-end" >
+        <button onClick={onGoBack} className="flex items-end justify-end text-[2.2rem] font-semibold">
+          <img src="/icons/arrow-left.svg" />
+        </button>
+      </div>
 
       <h4 className="text-center text-[1.6rem] font-semibold">کد تایید را وارد کنید.</h4>
       <form
@@ -91,7 +90,7 @@ function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
         </div>
         {/* timer */}
         <div className="text-center text-[1.4rem] font-light">
-          {timer > 0 ? `زمان باقی‌مانده: ${formatTime(timer)}` : "زمان منقضی شد"}
+          {timer > 0 ? `زمان باقی‌مانده: ${formatTheTime(timer)}` : "زمان منقضی شد"}
         </div>
         <Button label=" ورود به تورینو " status="submit" />
 

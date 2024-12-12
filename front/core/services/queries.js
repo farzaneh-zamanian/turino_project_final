@@ -1,12 +1,19 @@
-// import { useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
+import { api } from "../configs/api";
 
-// import api from "../configs/api";
 
-// const useGetAllProducts = (page) => {
-//   const queryFn = () => api.get(`products?page=${page}&limit=10`);
-//   const queryKey = ["all-products", page];
+const useGetUserProfile = () => {
+      const queryKey = ["user_profile"];
+      const queryFn = async () => {
+            try {
+                  const res = await api.get("/user/profile");
+                  return res.data
+            } catch (error) {
+                  throw new Error(error.message)
 
-//   return useQuery({ queryFn, queryKey });
-// };
+            }
+      }
+      return useQuery({ queryKey, queryFn });
+};
 
-// export { useGetAllProducts };
+export { useGetUserProfile };

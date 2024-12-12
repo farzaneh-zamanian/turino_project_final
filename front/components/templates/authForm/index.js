@@ -24,10 +24,11 @@ function AuthForm() {
       {/* <span className='px-2 text-primary'>|</span>
         <Link href="/" className='text-primary'>ثبت نام</Link> */}
 
-
+{/* conditionally render */}
 
       {/* Desktop login button */}
       <div className="hidden md:flex border border-solid border-primary px-5 rounded-xl">
+
         <button onClick={() => setIsOpen(true)} className='text-primary flex items-center'>
           <img src="/icons/user.svg" className='w-[24px]' />
           <span>ورود</span>
