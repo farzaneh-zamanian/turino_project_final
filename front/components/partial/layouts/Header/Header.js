@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
@@ -19,17 +19,39 @@ const links = [
 const Header = () => {
       const [isMenuOpen, setIsMenuOpen] = useState(false);
       const pathname = usePathname();
-      const accessToken = getCookie('accessToken'); // Check for access token
+      // const accessToken = getCookie('accessToken'); // Check for access token
+      const [accessToken, setAccessToken] = useState(null); // State to hold access token
       const [isVisibleProfile, setIsVisibleUserProfile] = useState(false);
 
-      const { data: userProfile, isError, isLoading } = accessToken ? useGetUserProfile() : { data: null, isError: false, isLoading: false };
 
-      const isAuthenticated = Boolean(userProfile); // Determine authentication based on userProfile
-      const mobileNumber = userProfile?.mobile;
-      //! there is problem in scroll the page in desktop
+
+      useEffect(() => {
+            const token = getCookie('accessToken'); // Get access token on client side
+            setAccessToken(token);
+        }, []); // Run only once on mount
+
+      // const { data: userProfile, isError, isLoading } = accessToken ? useGetUserProfile() : { data: null, isError: false, isLoading: false };
+    // Always call the hook, but handle the case where accessToken is null
+    const { data: userProfile, isError, isLoading } = useGetUserProfile(accessToken);
+
+    const isAuthenticated = Boolean(userProfile); // Determine authentication based on userProfile
+    
+    const mobileNumber = userProfile?.mobile;
+
+
+
+      // //! there is problem in scroll the page in desktop
+      // useEffect(() => {
+      //       document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
+      // }, [isMenuOpen]);
       useEffect(() => {
             document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
-      }, [isMenuOpen]);
+        
+            // Cleanup function to reset overflow when the component unmounts
+            return () => {
+                document.body.style.overflow = 'unset';
+            };
+        }, [isMenuOpen]);
 
 
       if (isLoading) return <p>Loading...</p>; // Optional loading state

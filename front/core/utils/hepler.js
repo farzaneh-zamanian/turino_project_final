@@ -10,7 +10,7 @@ const headerUserProfileItems = [
       //       className: 'pr-[1rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.4rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1',
       // },
       {
-            href:"/profile",
+            href:"/userProfile/profile",
             figure: {
                   icon: { src: '/icons/profile.svg', width: 16, height: 16 },
                   caption: { children: 'اطلاعات حساب کاربری', className: 'text-[1.2rem] md:text-[1.4rem] ' },

@@ -18,6 +18,8 @@ function Button({ label, status, onClick }) {
         'h-[2.9rem] w-[9.9rem] rounded-[0.4rem] text-white  bg-primary text-[1.5rem]': status === 'reservation',
         'w-full p-[0.8rem] rounded-[0.6rem] text-[1.4rem] text-white  bg-primary ': status === 'submit',
         'w-[232px] h-[58px] rounded-[1.6rem] text-[2rem]  bg-accentButtonColor text-primary  ': status === 'accent',
+        'w-full h-[40px] rounded-md text-[1.6rem]  bg-primary text-white  ': status === 'profileBtn',
+        'w-full h-[40px] rounded-md text-[1.6rem]  bg-white border-2 border-primary text-primary  ': status === 'cancelBtn',
       }
     )}>{label}</button>
   )

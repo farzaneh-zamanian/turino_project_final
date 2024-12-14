@@ -18,9 +18,25 @@ function NotFoundPage() {
                         <p className=' pb-[1.5rem] text-[2.4rem] font-semibold'>صفحه مورد نظر یافت نشد.</p>
                         <Button label="بازگشت" status="accent" onClick={handleBackToHome} />
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                   </div>
             </div>
       )
 }
 
 export default NotFoundPage
+
+

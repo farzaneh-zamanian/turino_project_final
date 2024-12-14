@@ -23,6 +23,10 @@ module.exports = {
         "accentButtonColor": ' rgba(216, 255, 225, 1)',
         "IconBgColor":'#D9D9D5',
         "hoverBgColor":'#F4F4F4',
+        "valueColor" : '#282828',
+        "borderDivColor" : '#00000033'
+ 
+        
 
       },
       screens: {
