@@ -1,4 +1,8 @@
 import Card from "@/components/ui/organisms/Card";
+import TourBookingForm from "@/components/ui/organisms/TourBookingForm";
+import ArrowLeft from "@/public/icons/icons/arrowLeft";
+import { notFound, redirect } from 'next/navigation'
+
 
 
 export default async function Home() {
@@ -7,30 +11,40 @@ export default async function Home() {
   // const PersianDatePicker = dynamic(() => import("./components/ui/organisms/PersianDatePicker"), { ssr: false });
 
   try {
+    // const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour`);
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour`);
+    // const res = await fetch(`https://invalid-url.com/tour`);
+
 
     // Check if the response is ok (status in the range 200-299)
     if (!res.ok) {
-      // if (res.status === 500) {
-      //   // Redirect to server error page
-      //   return {
-      //     redirect: {
-      //       destination: '/server-error',
-      //       permanent: false,
-      //     },
-      //   };
-      // } else if (res.status === 400) {
+      if (res.status === 500) {
+        alert("done")
+        // Instead of redirecting, throw an error to trigger the 500 page
+        throw new Error('Internal Server Error');        //   // Redirect to server error page
+        //   return {
+        //     redirect: {
+        //       destination: '/server-error',
+        //       permanent: false,
+        //     },
+        //   };
+      } else if (res.status === 404) {
+        return notFound()
+
+      }
       //   // Redirect to not found page
       //   return {
       //     notFound: true, // This will trigger the 404 page
       //   };
       // }
-      throw new Error(`HTTP error! status: ${res.status}`);
+      // throw new Error(`HTTP error! status: ${res.status}`);
     }
 
     data = await res.json();
   } catch (err) {
     console.error('Error fetching data:', err);
+    // throw new Error('Internal Server Error');
+
     error = err; // Store the error for later use
   }
 
@@ -38,7 +52,7 @@ export default async function Home() {
   if (!data.length && !error) return <p>...Loading</p>;
 
   // Show error message if there's an error
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <div>Erroryyyy: {error.message} {error.status}</div>;
 
 
 
@@ -49,10 +63,9 @@ export default async function Home() {
     <>
       {/* search box */}
       {/* <SearchBox/> */}
-    
 
 
-
+      <TourBookingForm data={data}/>
       <div>
         <div className="py-16  sm:py-24 ">
           <h2 className="text-[2rem] leading-[3rem] tracking-tight">همه تورها</h2>

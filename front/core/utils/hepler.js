@@ -55,13 +55,14 @@ const getInsuranceStatus = (insurance) => {
 const originDestinationTranslations = {
       "Tehran": "تهران",
       "Sanandaj": "سنندج",
+      "Sananndaj": "سنندج",
       "Isfahan": "اصفهان",
       "Madrid": "مادرید",
       "sulaymaniyahTour": "سلیمانیه",
       "Hewler": "هولر",
       "Mazandaran": "مازندران",
       "offRoad Center": "آفرود",
-      " Italy": "ایتالیا",
+      "Italy": "ایتالیا",
 };
 const getOriginNameInPersian = (originName) => {
       return originDestinationTranslations[originName] || originName; // Return the default message
@@ -75,5 +76,29 @@ const formatTheTime = (time) => {
       return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 };
 
-
-export { getVehicleNameInPersian, getInsuranceStatus, getOriginNameInPersian, formatTheTime, headerUserProfileItems };
+// Get the origin and destination option in 
+const renderUniqueOptions = (data,key) => {
+      // Step 1: Create an array of objects with origin names and IDs
+      const originArray = data.map(item => ({
+        name: item[key].name,
+        id: item[key].id
+      }));
+    
+      // Step 2: Use Set to filter unique origin names
+      const uniqueOriginsSet = new Set();
+      const uniqueOrigins = originArray.filter(item => {
+        if (!uniqueOriginsSet.has(item.name)) {
+          uniqueOriginsSet.add(item.name);
+          return true; // Keep this item
+        }
+        return false; // Filter out duplicates
+      });
+    
+      // Step 3: Map over the unique origins to create options
+      return uniqueOrigins.map((item, index) => (
+        <option key={index} value={item.id}>
+          {getOriginNameInPersian(item.name)}
+        </option>
+      ));
+    };
+export { getVehicleNameInPersian, getInsuranceStatus, getOriginNameInPersian, formatTheTime, headerUserProfileItems,renderUniqueOptions };

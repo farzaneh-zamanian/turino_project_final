@@ -11,18 +11,33 @@ import React from "react";
 
 async function TourDetails(props) {
   let data;
+  let error = null;
+
   const { params } = props;
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour/${params.id}`);
+  
+    if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    data = await res.json();
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour/${params.id}`);
-  data = await res.json();
+    
+  } catch (err) {
+    console.error('Error fetching data:', err);
+    // throw new Error('Internal Server Error');
 
-  // try {
-  //   const response = await api.get(`/tour/${params.id}`);
-  //   data = await response.data;
-  // } catch (error) {
-  //   console.error("Error fetching tour details:", error);
-  //   return <div>Error loading tour details.</div>; // Handle error gracefully
-  // }
+    error = err; // Store the error for later use
+  
+    
+  }
+    // Show loading state while data is being fetched
+
+    // Show error message if there's an error
+    if (error) return <div>Erroryyyy: {error.message} {error.status}</div>;
+  
+  
+
   const {
     image,
     title,

@@ -4,3 +4,17 @@ const isValidMobile = (val) => {
 };
 
 export { isValidMobile };
+
+
+
+
+// export const validateInput = (name, value) => {
+//   switch (name) {
+//         case "mobile":
+//               return validateUsername(name, value);
+//         case "password":
+//               return validatePassword(name, value);
+//         default:
+//               return "";
+//   }
+// }

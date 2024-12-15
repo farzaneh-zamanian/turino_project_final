@@ -1,3 +1,4 @@
+"use client"
 import Button from '@/components/ui/atoms/Button'
 import Headings from '@/components/ui/atoms/Headings'
 import Input from '@/components/ui/atoms/Input'
@@ -22,9 +23,19 @@ function Profile() {
         <div className='flex flex-col md:grid grid-cols-3 gap-5'>
 
           <Input placeholder="نام و نام خانوادگی" type="text" title="profilInputFull" />
+          <Input placeholder=" کدملی  " type="text" title="profilInputFull" />     
+
+          <select
+            id="gender"
+            className="placeholder:text-gray-400  rounded-[0.5rem] border  p-[0.8rem] w-full h-[4rem] "
+          >
+            <option value="" disabled selected className=""> جنسیت</option>
+            <option value="male">مرد</option>
+            <option value="female">زن</option>
+          </select>
+
           <Input placeholder=" کدملی  " type="text" title="profilInputFull" />
-          <Input placeholder=" کدملی  " type="text" title="profilInputFull" />
-          <Input placeholder=" کدملی  " type="text" title="profilInputFull" />
+          <Input placeholder=" تاریخ تولد  " type="text" title="profilInputFull" />
         </div>
         <div className='flex items-center gap-5 '>
           <Button label="انصراف" status="cancelBtn" />
