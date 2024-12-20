@@ -7,12 +7,13 @@ import { useCheckOtp } from "@/core/services/mutations";
 import { setCookie } from "@/core/utils/cookie";
 import Button from "@/components/ui/atoms/Button";
 import { formatTheTime } from "@/core/utils/hepler";
+import toast from "react-hot-toast";
 
 function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
   // Otp code status
   const [code, setCode] = useState("");
   //   Timer status
-  const [timer, setTimer] = useState(120); // 2 minutes in seconds
+  const [timer, setTimer] = useState(120); // 2 minutes - 120 seconds
 
   // useMutation
   const { isPending, mutate } = useCheckOtp();
@@ -34,12 +35,14 @@ function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
     event.preventDefault();
 
     if (isPending) return;
+    // if (code.length !==5) return;
 
     mutate(
       // send data to function
       { mobile, code },
       {
         onSuccess: (data) => {
+          toast.success("ورود شما با موفقیت انجام شد.")
           setCookie("accessToken", data?.data?.accessToken, 30);//30 days
           setCookie("refreshToken", data?.data?.refreshToken, 365);
           setIsOpen(false);
@@ -47,6 +50,7 @@ function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
         },
         onError: (error) => {
           console.log(error);
+          // toast.error(error.message); 
         },
       }
     );
@@ -63,6 +67,7 @@ function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
       <div className="flex justify-end" >
         <button onClick={onGoBack} className="flex items-end justify-end text-[2.2rem] font-semibold">
           <img src="/icons/arrow-left.svg" />
+          {/* <َArrowLeft /> */}
         </button>
       </div>
 

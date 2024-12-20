@@ -1,29 +1,58 @@
 "use client";
 
-import React, { useState } from "react";
-import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import dayjs from "dayjs";
-import dayjs from "@/utils/dayjsConfig";
 
-export default function PersianDatePicker() {
-  const [value, setValue] = useState(dayjs().calendar("jalali"));
+import DatePicker from "react-multi-date-picker";
+import persian from "react-date-object/calendars/persian";
+import persian_fa from "react-date-object/locales/persian_fa";
+import React from 'react'
 
+function PersianDatePicker() {
+  
+  
+  //   <DatePicker
+  //   calendar={persian}
+  //   locale={persian_fa}
+  //   format="YYYY/MM/DD"
+  //   showOtherDays
+  //   containerStyle={{
+  //     width: "100%",
+  //   }}
+  //   render={
+  //     <input
+  //       // base={"true"}
+  //       // bgcolor={"#ECECEC"}
+  //       placeholder="از تاریخ" // "From Date" in Persian
+  //       variant="Date"
+  //       // width={"100%"}
+  //       // height={"45px"}
+  //       // borderradius={"13px"}
+  //       className="mobile:hidden text-xs placeholder:text-xs placeholder:text-black"
+  //     />
+  //   }
+  // />
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <div className="py-4">
-        <DatePicker
-          label="تاریخ را انتخاب کنید"
-          value={value}
-          onChange={(newValue) => setValue(newValue)}
-          renderInput={(params) => <input {...params} className="border p-2 rounded w-full" />}
+    <DatePicker
+      calendar={persian}
+      locale={persian_fa}
+      format="YYYY/MM/DD"
+      showOtherDays
+      containerStyle={{
+        width: "100%",
+      }}
+      render={
+        <input
+          placeholder=" تاریخ" // "From Date" in Persian
+          type="text"
+          className="border p-2 rounded w-full text-xs placeholder:text-xs placeholder:text-black"
         />
-        {value && (
-          <p className="mt-4 text-lg">
-            تاریخ انتخاب شده: {value.calendar("jalali").format("YYYY/MM/DD")}
-          </p>
-        )}
-      </div>
-    </LocalizationProvider>
+      }
+    />
   );
 }
+  
+
+
+export default PersianDatePicker
+
+
+

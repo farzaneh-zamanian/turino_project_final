@@ -1,40 +1,36 @@
 "use client";
 import { renderUniqueOptions } from '@/core/utils/hepler';
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Import the CSS for the date picker
+import PersianDatePicker from './PersianDatePicker';
 
-const TourBookingForm = ({ data }) => {
-
-
-  console.log(data)
-  const [form, setForm] = useState({
+const TourBookingquery = ({ data }) => {
+  const [query, setquery] = useState({
     origin: "",
     destination: "",
-    startDate: null,
+    dateRange: [null, null], // Initialize state for date range
   });
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
-    setForm((prevForm) => ({
-      ...prevForm,
+    setquery((prevquery) => ({
+      ...prevquery,
       [name]: value,
     }));
   };
 
-  const handleDateChange = (date) => {
-    setForm((prevForm) => ({
-      ...prevForm,
-      startDate: date,
+  const handleDateRangeChange = (dateRange) => {
+    setquery((prevquery) => ({
+      ...prevquery,
+      dateRange,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle the booking logic here, e.g., fetch available tours based on origin, destination, and date
-    console.log('Origin:', form.origin);
-    console.log('Destination:', form.destination);
-    console.log('Selected Date:', form.startDate);
+    // Handle the booking logic here, e.g., fetch available tours based on origin, destination, and date range
+    console.log('Origin:', query.origin);
+    console.log('Destination:', query.destination);
+    console.log('Selected Date Range:', query.dateRange);
   };
 
   return (
@@ -44,7 +40,7 @@ const TourBookingForm = ({ data }) => {
         <select
           id="origin"
           name="origin"
-          value={form.origin}
+          value={query.origin}
           onChange={changeHandler}
           className="placeholder:text-gray-400 rounded-md border border-gray-300 p-2 w-full h-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         >
@@ -58,7 +54,7 @@ const TourBookingForm = ({ data }) => {
         <select
           id="destination"
           name="destination"
-          value={form.destination}
+          value={query.destination}
           onChange={changeHandler}
           className="placeholder:text-gray-400 rounded-md border border-gray-300 p-2 w-full h-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         >
@@ -67,16 +63,9 @@ const TourBookingForm = ({ data }) => {
           {renderUniqueOptions(data, 'destination')}
         </select>
       </div>
-      {/* Start Date and End Date */}
+      {/* Date Range */}
       <div>
-        <label className="block text-lg font-medium">Select Date</label>
-        <DatePicker
-          selected={form.startDate}
-          onChange={handleDateChange}
-          className="placeholder:text-gray-400 rounded-md border border-gray-300 p-2 w-full h-12 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-          dateFormat="MMMM d, yyyy" // Format of the date displayed
-          placeholderText="Select a date"
-        />
+        <PersianDatePicker onChange={handleDateRangeChange} />
       </div>
 
       <button type="submit" className="mt-4 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
@@ -86,4 +75,4 @@ const TourBookingForm = ({ data }) => {
   );
 };
 
-export default TourBookingForm;
+export default TourBookingquery;

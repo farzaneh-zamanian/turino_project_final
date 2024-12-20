@@ -5,6 +5,16 @@ import Input from '@/components/ui/atoms/Input'
 import DualSpan from '@/components/ui/molecules/DualSpan'
 import React from 'react'
 
+// export const metadata =  {
+//   // absolute:"absolute",
+//   title: "User Profile",
+//   description: "Tourism tour booking",
+//   keywords: "tour, offroad,travel",
+
+// };
+
+
+
 function Profile() {
   return (
     <div className='flex flex-col gap-[2rem]'>

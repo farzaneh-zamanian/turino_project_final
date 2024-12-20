@@ -1,10 +1,10 @@
-import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
+
+import localFont from "next/font/local";
 import Head from "next/head"; // Import Head from next/head
 import Layout from "@/components/partial/layouts/Layout";
-import { Toaster } from "react-hot-toast";
 import TanstackQueryProvider from "@/components/partial/providers/TanstackQueryProvider";
-
 
 
 // FONT CONFIG
@@ -14,12 +14,11 @@ const yekanFont = localFont({
 
 export const metadata = {
   title: {
-    absolute: "",
     default: "Turino App",
     template: "Turino App | %s ",
   },
   description: "Tourism tour booking",
-  keywords: "tour, offroad,travel",
+  keywords: "tour, offroad ,travel, trip",
 
 };
 
@@ -32,11 +31,9 @@ export default function RootLayout({ children }) {
       </Head>
       <body className={`${yekanFont.className} text-textColor overflow-x-hidden antialiased`}>
         <TanstackQueryProvider>
-          <Layout children={children} />
+          <Layout>{children}</Layout>
         </TanstackQueryProvider>
-        <Toaster/>
-
-
+        <Toaster />
       </body>
     </html >
   );

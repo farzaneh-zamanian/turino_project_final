@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-/* :root {
-  --color-primary: rgba(40, 167, 69, 1);
-
-  --color-secondary: rgba(16, 65, 27, 1);
-
-  --color-accent: rgba(0, 158, 202, 1);
-
-  --color-body: rgb(40, 40, 40, 1);
-
-  --color-body-lighter: rgba(125, 125, 125, 1);
-
-  --color-headings: rgb(40, 40, 40, 1);
-} */
 *,
 *::after,
 *::before {

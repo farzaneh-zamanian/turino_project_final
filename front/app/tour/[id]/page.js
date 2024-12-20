@@ -1,42 +1,57 @@
 import IconDescriptionCard from "@/components/ui/molecules/IconDescriptionCard";
 import ReservationCard from "@/components/ui/molecules/ReservationCard";
-import { api } from "@/core/configs/api";
 import {
   getInsuranceStatus,
   getOriginNameInPersian,
   getVehicleNameInPersian,
 } from "@/core/utils/hepler";
-import Image from "next/image";
-import React from "react";
+// import Image from "next/image";
+// import React from "react";
+// import toast from "react-hot-toast";
+
+
+export const metadata = {
+  title: "Tour details",
+  description: "Tourism tour booking",
+  keywords: "tour, offroad,travel",
+
+};
+
 
 async function TourDetails(props) {
-  let data;
-  let error = null;
 
+  // Variables for fetching data
+  let data = [];
+  let fetchError = null;
+
+  // Get product id
   const { params } = props;
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour/${params.id}`);
-  
     if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
+      if (res.status === 404) {
+        return notFound(); // Redirect to 404 page
+      }
+      throw new Error("Failed to fetch data");
     }
+
+    // Parse the JSON response
     data = await res.json();
-
-    
   } catch (err) {
-    console.error('Error fetching data:', err);
-    // throw new Error('Internal Server Error');
-
-    error = err; // Store the error for later use
-  
-    
+    fetchError = err; // Store the error for later use
   }
-    // Show loading state while data is being fetched
+  // if (fetchError) {
+  //   return <div className="error">Error: {fetchError.message}</div>;
+  // }
 
-    // Show error message if there's an error
-    if (error) return <div>Erroryyyy: {error.message} {error.status}</div>;
-  
-  
+  if (!data) {
+    return <div className="loading">Loading...</div>;
+  }
+
+
+
+
+
 
   const {
     image,
@@ -106,67 +121,78 @@ async function TourDetails(props) {
   ];
 
   return (
-    <div className="mx-auto mt-[2rem] md:rounded-md md:border md:border-solid md:border-borderColor md:p-[2rem] ">
-      <div className="flex flex-col mx-auto md:flex md:flex-row md:gap-10 ">
-        {/* Image */}
-        <img
-          src={image}
-          alt={title}
-          className="w-full rounded-lg md:w-[30rem] h-[20rem]"
-          layout="responsive"
-        />
+    <>
+      <div className="mx-auto mt-[2rem] md:rounded-md md:border md:border-solid md:border-borderColor md:p-[2rem] ">
+        <div className="flex flex-col mx-auto md:flex md:flex-row md:gap-10 ">
+          {/* Image */}
+          <img
+            src={image}
+            alt={title}
+            className="w-full rounded-lg md:w-[30rem] h-[20rem]"
+            layout="responsive"
+          />
 
-        {/* Description */}
-        <div className="flex flex-col gap-5">
-          <div className="flex justify-between items-center md:flex-col md:items-start">
-            <h2 className="text-[2.4rem] font-bold">{title}</h2>
-            <span>5 روز و 4 شب</span>
+          {/* Description */}
+          <div className="flex flex-col gap-5">
+            <div className="flex justify-between items-center md:flex-col md:items-start">
+              <h2 className="text-[2.4rem] font-bold">{title}</h2>
+              <span>5 روز و 4 شب</span>
+            </div>
+
+            {/* Options */}
+            <div className="flex justify-between md:gap-10">
+              {options.map(({ icon, label }, index) => (
+                <div key={index} className="flex items-center gap-[1rem]">
+                  <img src={icon} className="w-[1.4rem] h-[1.4rem]" alt={label} />
+                  <p className="text-textLightColor text-[1.3rem]">{label}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* mobile Features */}
+            <div className="flex justify-between md:hidden">
+              {features.map(({ icon, label, value }, index) => (
+                <div key={index} className="flex flex-col">
+                  <IconDescriptionCard label={label} icon={icon} />
+                  <p>{value}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Action */}
+            <ReservationCard
+              label="رزرو و خرید "
+              status="reservation"
+              price={price}
+              classNames="text-priceColor"
+            />
           </div>
-
-          {/* Options */}
-          <div className="flex justify-between md:gap-10">
-            {options.map(({ icon, label }, index) => (
-              <div key={index} className="flex items-center gap-[1rem]">
-                <img src={icon} className="w-[1.4rem] h-[1.4rem]" alt={label} />
-                <p className="text-textLightColor text-[1.3rem]">{label}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* mobile Features */}
-          <div className="flex justify-between md:hidden">
-            {features.map(({ icon, label, value }, index) => (
-              <div key={index} className="flex flex-col">
+        </div>
+        {/* desktop Features */}
+        <div className=" hidden  md:flex justify-between items-center mt-[2rem] ">
+          {featuresDesktop.map(({ icon, label, value }, index) => (
+            <>
+              <div key={index} className="flex flex-col ">
                 <IconDescriptionCard label={label} icon={icon} />
                 <p>{value}</p>
               </div>
-            ))}
-          </div>
-
-          {/* Action */}
-          <ReservationCard
-            label="رزرو و خرید "
-            status="reservation"
-            price={price}
-            classNames="text-priceColor"
-          />
+              {index < featuresDesktop.length - 1 && (
+                <span className="border border-solid h-[6rem] border-borderColor"></span>
+              )}
+            </>
+          ))}
         </div>
       </div>
-      {/* desktop Features */}
-      <div className=" hidden  md:flex justify-between items-center mt-[2rem] ">
-        {featuresDesktop.map(({ icon, label, value }, index) => (
-          <>
-            <div key={index} className="flex flex-col ">
-              <IconDescriptionCard label={label} icon={icon} />
-              <p>{value}</p>
-            </div>
-            {index < featuresDesktop.length - 1 && (
-              <span className="border border-solid h-[6rem] border-borderColor"></span>
-            )}
-          </>
-        ))}
-      </div>
-    </div>
+
+
+
+      {/* Display error message */}
+      {fetchError && (
+        <div className="mt-4 text-red-500 text-center">Error: {fetchError.message}</div>
+      )}
+
+    </>
+
   );
 }
 

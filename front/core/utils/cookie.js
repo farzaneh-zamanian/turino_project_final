@@ -1,9 +1,7 @@
 "use client";
 
 function setCookie(name, value, days = 30) {
-  console.log("done setting cookie")
   const maxAge = days * 24 * 60 * 60;
-  console.log(maxAge)
   document.cookie = `${name}=${value}; max-age=${maxAge}; path=/ `;
 }
 

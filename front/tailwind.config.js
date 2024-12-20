@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+
+
 module.exports = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -11,6 +13,7 @@ module.exports = {
 
     extend: {
       colors: {
+        
         "primary": "rgba(40, 167, 69, 1)",
         "secondary": "rgba(16, 65, 27, 1)",
         "accent": " rgba(0, 158, 202, 1)",
@@ -24,9 +27,7 @@ module.exports = {
         "IconBgColor":'#D9D9D5',
         "hoverBgColor":'#F4F4F4',
         "valueColor" : '#282828',
-        "borderDivColor" : '#00000033'
- 
-        
+        "borderDivColor" : '#00000033'  
 
       },
       screens: {
@@ -49,7 +50,20 @@ module.exports = {
         extrabold: '800',
         'extra-bold': '800',
         black: '900',
-      }
+      },
+      animation: {
+        spin: 'spin 1s linear infinite',
+      },
+
+      keyframes: {
+        spin: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
+      
+
+
 
     },
   },
