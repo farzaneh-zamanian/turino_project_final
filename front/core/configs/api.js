@@ -46,10 +46,10 @@ api.interceptors.response.use(
                         setCookie("refreshToken", res?.response?.data.refreshToken, 360);
                         return api(orginialRequest);//get orginialRequest as parameter to api to send the request again
                   }
-                  //  else {
-                  //       setCookie("accessToken", "", 0);
-                  //       setCookie("refreshToken", "", 0);
-                  // }
+                   else {
+                        setCookie("accessToken", "", 0);
+                        setCookie("refreshToken", "", 0);
+                  }
             }
             return Promise.reject(error.response.data);
       }

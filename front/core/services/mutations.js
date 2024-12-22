@@ -1,5 +1,6 @@
 import { QueryClient, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../configs/api";
+import { setCookie } from "../utils/cookie";
 
 
 
@@ -22,8 +23,10 @@ const useSendOtp = () => {
 const useCheckOtp = () => {
   const queryClient = useQueryClient();
   const mutationFn = (data) => api.post("/auth/check-otp", data);
-  const onSuccess = async() => {
-    await queryClient.invalidateQueries({queryKey:"user_data"})
+  const onSuccess = (data) => {
+    setCookie("accessToken", data?.data?.accessToken, 30);//30 days
+    setCookie("refreshToken", data?.data?.refreshToken, 365);
+    queryClient.invalidateQueries({queryKey:"user_data"})
   }
   // return useMutation({ mutationFn });
   return useMutation({ mutationFn ,onSuccess});

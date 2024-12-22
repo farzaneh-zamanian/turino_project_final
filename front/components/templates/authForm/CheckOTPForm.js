@@ -2,9 +2,8 @@
 
 import OtpInput from "react18-input-otp";
 import { useEffect, useState } from "react";
-
+ 
 import { useCheckOtp } from "@/core/services/mutations";
-import { setCookie } from "@/core/utils/cookie";
 import Button from "@/components/ui/atoms/Button";
 import { formatTheTime } from "@/core/utils/hepler";
 import toast from "react-hot-toast";
@@ -41,10 +40,9 @@ function CheckOTPForm({ mobile, setStep, setIsOpen, onGoBack }) {
       // send data to function
       { mobile, code },
       {
-        onSuccess: (data) => {
+        onSuccess: async() => {
           toast.success("ورود شما با موفقیت انجام شد.")
-          setCookie("accessToken", data?.data?.accessToken, 30);//30 days
-          setCookie("refreshToken", data?.data?.refreshToken, 365);
+        
           setIsOpen(false);
           setStep(1);
         },
