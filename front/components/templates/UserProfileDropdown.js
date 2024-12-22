@@ -8,7 +8,7 @@ import React from 'react'
 
 function UserProfileDropdown ({ mobileNumber, isVisibleProfile, toggleUserProfileVisibility, logOutHandler }) {
   return (
-      <div className='relative w-[18rem] h-[4.4rem] flex flex-col items-center'>
+      <div className='relative border border-primary rounded-lg w-[18rem] h-[4.4rem] flex flex-col items-center'>
       <div onClick={toggleUserProfileVisibility} className='cursor-pointer text-primary flex justify-center items-center gap-1'>
         <UserLogin />
         <span className='text-[1.2rem] md:text-[1.8rem]'>{mobileNumber}</span>

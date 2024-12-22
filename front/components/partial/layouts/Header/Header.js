@@ -6,7 +6,6 @@ import { UserGroupIcon, HomeIcon, DocumentDuplicateIcon, PhoneIcon } from '@hero
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
 import { useGetUserData } from '@/core/services/queries';
-import toast from 'react-hot-toast';
 
 const links = [
       { name: 'صفحه اصلی', href: '/', icon: HomeIcon },
@@ -21,7 +20,8 @@ const Header = () => {
       const [isMenuOpen, setIsMenuOpen] = useState(false);//dropDown state
       const [isVisibleProfile, setIsVisibleUserProfile] = useState(false);
 
-      const { data, isError, error, isLoading } = useGetUserData()
+      // const { data, isError, error, isLoading } = useGetUserData()
+      const { data} = useGetUserData()
       mobileNumber = data?.mobile;
 
       // //! there is problem in scroll the page in desktop
@@ -34,11 +34,11 @@ const Header = () => {
       }, [isMenuOpen]);
 
 
-      if (isLoading) return <p>Loading...</p>; // Optional loading state
-      if (isError) {
-            // toast.error(error.message);
-            return <p>Something went wrong. Please try again later.</p>; // Fallback UI for errors
-      }
+      // if (isLoading) return <p>Loading...</p>; // Optional loading state
+      // if (isError) {
+      //       // toast.error(error.message);
+      //       return <p>Something went wrong. Please try again later.</p>; // Fallback UI for errors
+      // }
 
       return (
             <>

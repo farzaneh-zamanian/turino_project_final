@@ -5,10 +5,10 @@ import { api } from "../configs/api";
 
 // GET user profile data 
 const useGetUserData = () => {
-      const queryKey = ["user_data"];
+      const queryKey = ["user-data"];
       const queryFn = async () => {
             const response = await api.get("/user/profile");
-            return response.data; // Return the data directly
+            return response.data; 
       };
       return useQuery({ queryKey, queryFn });
 }

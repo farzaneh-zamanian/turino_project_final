@@ -22,16 +22,16 @@ const useSendOtp = () => {
 // Send the mobile number and otp code as request and recieve the access token and refresh token
 const useCheckOtp = () => {
   const queryClient = useQueryClient();
-  const mutationFn = (data) => api.post("/auth/check-otp", data);
-  const onSuccess = (data) => {
-    setCookie("accessToken", data?.data?.accessToken, 30);//30 days
-    setCookie("refreshToken", data?.data?.refreshToken, 365);
-    queryClient.invalidateQueries({queryKey:"user_data"})
-  }
-  // return useMutation({ mutationFn });
-  return useMutation({ mutationFn ,onSuccess});
-};
+  const mutationFn = (data) => api.post("auth/check-otp", data);
 
+  const onSuccess = (data) => {
+    setCookie("accessToken", data?.data?.accessToken, 30);
+    setCookie("refreshToken", data?.data?.refreshToken, 365);
+    queryClient.invalidateQueries({ queryKey: ["user-data"] });
+  };
+
+  return useMutation({ mutationFn, onSuccess });
+};
 
 
 export { useSendOtp, useCheckOtp };
