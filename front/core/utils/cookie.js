@@ -1,9 +1,7 @@
 "use client";
 
-// function setCookie(name, value, days = 30) {
-//   const maxAge = days * 24 * 60 * 60;
-//   document.cookie = `${name}=${value}; max-age=${maxAge}; path=/ `;
-// }
+
+// set cookie
 function setCookie(name, value, days) {
   var expires = "";
   if (days) {
@@ -14,7 +12,7 @@ function setCookie(name, value, days) {
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
 
-
+// get cookie
 function getCookie(name) {
   const value = `; ${document?.cookie}`;
   const parts = value?.split(`; ${name}=`);

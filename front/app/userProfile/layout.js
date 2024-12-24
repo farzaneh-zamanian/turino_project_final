@@ -48,7 +48,7 @@ function UserProfileLayout({ children }) {
                               </ul>
                         </nav>
                         {/* Contents */}
-                        <div className='md:w-full col-span-3'>{children}</div>
+                        <div className='md:w-full col-span-3 md:flex md:flex-col gap-[2rem]'>{children}</div>
                   </div>
             </AuthProvider>
 

@@ -1,9 +1,5 @@
 "use client"
 
-
-
-
-
 import Button from '@/components/ui/atoms/Button'
 import Headings from '@/components/ui/atoms/Headings'
 import InputProfile from '@/components/ui/atoms/InputsProfile'
@@ -17,6 +13,8 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import DateObject from 'react-date-object'
 import UserBankAccountForm from "@/components/templates/userBankAccountForm";
+import UserAccountInfoForm from '@/components/templates/userAccountInfoForm'
+import UserPersonalInfoForm from '@/components/templates/userPersonalInfoForm'
 
 
 // Array for personal information inputs
@@ -142,125 +140,13 @@ function Profile() {
   return (
 
     <>
+      {/* user account form */}
+      <UserAccountInfoForm data={data} />
+      {/* user bank account form */}
+      <UserBankAccountForm data={data} />
+      {/* user prsonal account */}
+      <UserPersonalInfoForm data={data} />
 
-      <UserBankAccountForm />
-      <div className='flex flex-col gap-[2rem] '>
-        <form onSubmit={submitHandler} className='flex flex-col gap-5 border border-borderDivColor rounded-2xl p-[1.5rem]'>
-          <Headings label="  اطلاعات حساب کاربری" type="h2" />
-          <div className='flex flex-col gap-5 md:flex-row justify-between'>
-            <DualSpan title="شماره موبایل" value={form.mobile} />
-            <div className='flex flex-row items-center justify-between gap-5 w-full'>
-              <div className='flex flex-col items-center justify-center'>
-                <InputProfile
-                  placeholder="آدرس ایمیل"
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={changeHandler}
-                  className="w-[30rem]"
-                />
-                <div className='text-red-700 h-[2rem]'>
-                  {isValidate.email && <span style={{ color: "red" }}>{isValidate.email}</span>
-                  }
-                </div>
-              </div>
-              <Button label="تایید" status="profileBtn" type="submit" />
-            </div>
-          </div>
-        </form>
-
-        <form onSubmit={submitHandler} className='flex flex-col border border-borderDivColor rounded-2xl p-[1.5rem] gap-[1rem]'>
-          <div className='flex flex-col md:grid grid-cols-3 gap-5'>
-            {personalInputs.map((inputProps, index) => (<div className='flex flex-col'>
-
-              <InputProfile
-                key={index}
-                placeholder={inputProps.placeholder}
-                type={inputProps.type}
-                name={inputProps.name}
-                value={form[inputProps.name]}
-                onChange={changeHandler}
-              />
-
-              <div className='text-red-700 h-[2rem]'>
-                {isValidate[inputProps.name] && <span style={{ color: "red" }}>{isValidate[inputProps.name]}</span>
-                }
-              </div>
-
-
-
-
-
-            </div>
-            ))}
-            <DatePicker
-              calendar={persian}
-              locale={persian_fa}
-              format="YYYY/MM/DD"
-              showOtherDays
-              containerStyle={{
-                width: "100%",
-              }}
-              value={form.birthDate}
-              onChange={handleDateChange}
-
-              render={
-                <input
-                  name="birthDate"
-                  placeholder=" تاریخ" // "From Date" in Persian
-                  type="text"
-                  className="border rounded-[0.5rem] p-[0.8rem] w-full"
-                  readOnly
-                />
-              }
-            />
-
-            <select
-              name="gender"
-              value={form.gender}
-              onChange={changeHandler}
-              // className="placeholder:text-gray-400  rounded-[0.5rem] border  p-[0.8rem] w-full h-[4rem] "
-              className="border rounded-[0.5rem] p-[0.8rem] w-full "
-            >
-              <option value="" disabled selected className=""> جنسیت</option>
-              <option value="male">مرد</option>
-              <option value="female">زن</option>
-            </select>
-
-          </div>
-          <div className='flex items-center gap-5 '>
-            <Button label="انصراف" status="cancelBtn" />
-            <Button label="تایید" status="profileBtn" type="submit" />
-          </div>
-
-
-        </form>
-
-        <form onSubmit={submitHandler} className='flex flex-col border border-borderDivColor rounded-2xl p-[1.5rem] gap-[1rem]'>
-          <div className='flex flex-col md:grid grid-cols-3 gap-5'>
-            {paymentInputs.map((inputProps, index) => (<div className='flex flex-col'>
-              <InputProfile
-                key={index}
-                placeholder={inputProps.placeholder}
-                type={inputProps.type}
-                name={inputProps.name}
-                value={form.payment[inputProps.name]}
-                onChange={changeHandler}
-              />
-              <div className='text-red-700 h-[2rem]'>
-                {isValidate[inputProps.name] && <span style={{ color: "red" }}>{isValidate[inputProps.name]}</span>
-                }
-              </div>
-            </div>
-            ))}
-
-          </div>
-          <div className='flex items-center gap-5'>
-            <Button label="انصراف" status="cancelBtn" />
-            <Button label="تایید" status="profileBtn" type="submit" />
-          </div>
-        </form>
-      </div>
 
     </>
 

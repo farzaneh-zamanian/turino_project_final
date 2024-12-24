@@ -1,33 +1,33 @@
 
-const headerUserProfileItems = [
-      // {
-      //       href:"/",
-      //       figure: {
-      //             icon: { src: '/icons/userProfile.svg', width: 16, height: 16 },
-      //             caption: { children: 'mobileNumber', className: 'text-[1.6rem] font-medium' },
-      //             className: 'p-[0.5rem] rounded-full flex gap-2 ',
-      //       },
-      //       className: 'pr-[1rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.4rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1',
-      // },
-      {
-            href:"/userProfile/profile",
-            figure: {
-                  icon: { src: '/icons/profile.svg', width: 16, height: 16 },
-                  caption: { children: 'اطلاعات حساب کاربری', className: 'text-[1.2rem] md:text-[1.4rem] ' },
-                  className: 'flex gap-2',
-            },
-            className: 'pr-[1.5rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.6rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1',
-      },
-      {
-            href:"/",
-            figure: {
-                  icon: { src: '/icons/logout.svg', width: 16, height: 16 },
-                  caption: { children: 'خروج از حساب کاربری', className: 'text-[#D40000] text-[1.2rem] md:text-[1.4rem]' },
-                  className: 'flex gap-2',
-            },
-            className: 'pr-[1.5rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.6rem]',
-      },
-];
+// const headerUserProfileItems = [
+//       // {
+//       //       href:"/",
+//       //       figure: {
+//       //             icon: { src: '/icons/userProfile.svg', width: 16, height: 16 },
+//       //             caption: { children: 'mobileNumber', className: 'text-[1.6rem] font-medium' },
+//       //             className: 'p-[0.5rem] rounded-full flex gap-2 ',
+//       //       },
+//       //       className: 'pr-[1rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.4rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1',
+//       // },
+//       {
+//             href: "/userProfile/profile",
+//             figure: {
+//                   icon: { src: '/icons/profile.svg', width: 16, height: 16 },
+//                   caption: { children: 'اطلاعات حساب کاربری', className: 'text-[1.2rem] md:text-[1.4rem] ' },
+//                   className: 'flex gap-2',
+//             },
+//             className: 'pr-[1.5rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.6rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1',
+//       },
+//       {
+//             href: "/",
+//             figure: {
+//                   icon: { src: '/icons/logout.svg', width: 16, height: 16 },
+//                   caption: { children: 'خروج از حساب کاربری', className: 'text-[#D40000] text-[1.2rem] md:text-[1.4rem]' },
+//                   className: 'flex gap-2',
+//             },
+//             className: 'pr-[1.5rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.6rem]',
+//       },
+// ];
 
 
 
@@ -51,7 +51,6 @@ const getInsuranceStatus = (insurance) => {
 }
 
 // Get persian origin name
-
 const originDestinationTranslations = {
       "Tehran": "تهران",
       "Sanandaj": "سنندج",
@@ -77,28 +76,56 @@ const formatTheTime = (time) => {
 };
 
 // Get the origin and destination option in 
-const renderUniqueOptions = (data,key) => {
+const renderUniqueOptions = (data, key) => {
       // Step 1: Create an array of objects with origin names and IDs
       const originArray = data.map(item => ({
-        name: item[key].name,
-        id: item[key].id
+            name: item[key].name,
+            id: item[key].id
       }));
-    
+
+
+
       // Step 2: Use Set to filter unique origin names
       const uniqueOriginsSet = new Set();
       const uniqueOrigins = originArray.filter(item => {
-        if (!uniqueOriginsSet.has(item.name)) {
-          uniqueOriginsSet.add(item.name);
-          return true; // Keep this item
-        }
-        return false; // Filter out duplicates
+            if (!uniqueOriginsSet.has(item.name)) {
+                  uniqueOriginsSet.add(item.name);
+                  return true;
+            }
+            return false;
       });
-    
-      // Step 3: Map over the unique origins to create options
+
       return uniqueOrigins.map((item, index) => (
-        <option key={index} value={item.id}>
-          {getOriginNameInPersian(item.name)}
-        </option>
+            <option key={index} value={item.id}>
+                  {getOriginNameInPersian(item.name)}
+            </option>
       ));
-    };
-export { getVehicleNameInPersian, getInsuranceStatus, getOriginNameInPersian, formatTheTime, headerUserProfileItems,renderUniqueOptions };
+};
+
+const flattenObject = (obj, delimiter = ".", prefix = "") => {
+      const flattObject = Object.keys(obj).reduce((acc, k) => {
+            const pre = prefix.length ? `${prefix}${delimiter}` : "";
+            if (
+                  typeof obj[k] === "object" &&
+                  obj[k] !== null &&
+                  Object.keys(obj[k]).length > 0
+            )
+                  Object.assign(acc, flattenObject(obj[k], delimiter, k));
+            else acc[k] = obj[k];
+            return acc;
+      }, {});
+
+      return flattObject;
+};
+
+const DateToIso = (date) => new Date(date).toISOString();
+
+
+export {
+      getVehicleNameInPersian,
+      getInsuranceStatus,
+      getOriginNameInPersian,
+      formatTheTime,
+      renderUniqueOptions,
+      flattenObject, DateToIso
+};

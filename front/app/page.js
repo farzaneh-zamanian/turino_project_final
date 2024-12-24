@@ -1,3 +1,4 @@
+import SearchToursForm from "@/components/templates/SearchToursForm";
 import Card from "@/components/ui/organisms/Card";
 import TourBookingForm from "@/components/ui/organisms/TourBookingForm";
 import { notFound } from 'next/navigation'
@@ -5,8 +6,6 @@ import { notFound } from 'next/navigation'
 
 
 export default async function Home() {
-
-
   // Variables for fetching data
   let data = [];
   let fetchError = null;
@@ -14,7 +13,6 @@ export default async function Home() {
 
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour`);
-
     // Check if the response is ok (status in the range 200-299)
     if (!res.ok) {
       if (res.status === 404) {
@@ -39,10 +37,9 @@ export default async function Home() {
   return (
     <>
       {/* search box */}
-      {/* <SearchBox/> */}
-
+      <SearchToursForm data={data}/>
+       <TourBookingForm data={data} />
       {/* Display tours */}
-      <TourBookingForm data={data} />
       <div>
         <div className="py-16  sm:py-24 ">
           <h2 className="text-[2rem] leading-[3rem] tracking-tight">همه تورها</h2>
