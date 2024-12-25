@@ -4,19 +4,17 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DatePicker } from "zaman";
-
 import toast from "react-hot-toast";
+
 import { useUpdateUserBankAccount } from "@/core/services/mutations";
 import { personalInformationSchema } from "@/core/schema";
 import EditIcon from "@/public/icons/icons/EditIcon";
 import { DateToIso, flattenObject, getGenderInPersian } from "@/core/utils/hepler";
 import Button from "@/components/ui/atoms/Button";
-import { convertLength } from "@mui/material/styles/cssUtils";
 
 function UserPersonalInfoForm({ data }) {
       const { firstName, lastName, gender, birthDate, nationalCode } = data;
       const [isEditing, setIsEditing] = useState(false);
-      // mutation of update data
       const { mutate, isPending } = useUpdateUserBankAccount();
 
 
@@ -32,24 +30,23 @@ function UserPersonalInfoForm({ data }) {
 
       // Function to submit form 
       const submitHandler = (form) => {
-            const splitFullName = form.name.trim().split(" ");
-            const firstName = splitFullName[0] || ""; // Get first name or empty string
-            const lastName = splitFullName.slice(1).join(" ") || ""; // Get last name or empty string
+            const [firstName, ...lastNameParts] = form.name.trim().split(" ");
+            const lastName = lastNameParts.join(" ") || ""; // Join remaining parts for last name
 
-            // Prepare the data to be sent
+            // data to be sent to server
             const updatedData = {
                   ...form,
                   firstName,
                   lastName,
             };
-            const flattenedData = flattenObject(updatedData)
-            console.log(flattenedData)
+
             if (isPending) return; // Prevent submission if pending
 
-            mutate(flattenedData, {
+
+            mutate(flattenObject(updatedData), {
                   onSuccess: (response) => {
                         toast.success(response?.data?.message);
-                        setIsEditing(false); // Optio
+                        setIsEditing(false);
                   },
                   onError: (error) => {
                         toast.error(`مشکلی پیش آمده است لطفا مجدد تلاش کنید.: ${error.message}`);
@@ -60,7 +57,6 @@ function UserPersonalInfoForm({ data }) {
       // Function to handle edit button 
       const handleEditClick = () => {
             setIsEditing(true);
-            // Set form values to existing data for editing
             setValue("name", `${firstName} ${lastName}`); // Set the full name in the input
             setValue("nationalCode", nationalCode); // Set the national code
             setValue("gender", gender); // Set the gender
@@ -103,28 +99,29 @@ function UserPersonalInfoForm({ data }) {
 
 
                         {/* select birth date */}
-                        {isEditing ? (<Controller
+                        <Controller
                               control={control}
                               name="birthDate"
                               render={({ field: { onChange } }) => (
-                                    <DatePicker
-                                          accentColor="#28A745"
-                                          round="x2"
-                                          inputClass="w-[25rem] h-[4.5rem] border  md:rounded-[0.5rem] "
-                                          onChange={(e) =>
-                                                onChange({
-                                                      birthDate: (DateToIso(e.value)).split('T')[0],
-                                                })
+                                    isEditing ? (
+                                          <DatePicker
+                                                accentColor="#28A745"
+                                                round="x2"
+                                                inputClass="w-[25rem] h-[4.5rem] border md:rounded-[0.5rem]"
+                                                onChange={(e) =>
+                                                      onChange({
+                                                            birthDate: (DateToIso(e.value)).split('T')[0],
+                                                      })
 
-                                          }
-                                    />
+                                                } />
+                                    ) : (
+                                          <p className="flex items-center gap-4">
+                                                <span>تاریخ : </span>
+                                                <span>{birthDate || "-"}</span>
+                                          </p>
+                                    )
                               )}
-                        />) : (
-                              <p className="flex items-center gap-4">
-                                    <span>تاریخ : </span>
-                                    <span>{birthDate || "-"}</span>
-                              </p>
-                        )}
+                        />
 
 
 
@@ -137,11 +134,6 @@ function UserPersonalInfoForm({ data }) {
                               <span>جنسیت : </span>
                               <span>{getGenderInPersian(gender) || "-"}</span>
                         </p>)}
-
-
-
-
-
 
                   </div>
 

@@ -25,12 +25,10 @@ const useCheckOtp = () => {
 };
 
 
-// PUT 
+// PUT - user profile information request
 const useUpdateUserBankAccount = () => {
   const queryClient = useQueryClient();
-
   const mutationFn = (data) => api.put("user/profile", data);
-
   const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: ["user-data"] });
   };
@@ -38,5 +36,17 @@ const useUpdateUserBankAccount = () => {
   return useMutation({ mutationFn, onSuccess });
 };
 
+// PUT - tour reservation request
+const useUpdateUserTour = () => {
+  const queryClient = useQueryClient();
+  const mutationFn = (tourId) => api.put(`basket/${tourId}`);
+  const onSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: ["user-data"] });
+  };
 
-export { useSendOtp, useCheckOtp, useUpdateUserBankAccount };
+  return useMutation({ mutationFn, onSuccess });
+
+}
+
+
+export { useSendOtp, useCheckOtp, useUpdateUserBankAccount, useUpdateUserTour };

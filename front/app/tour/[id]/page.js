@@ -1,13 +1,19 @@
 import IconDescriptionCard from "@/components/ui/molecules/IconDescriptionCard";
 import ReservationCard from "@/components/ui/molecules/ReservationCard";
+import TourReservationActionButton from "@/components/ui/organisms/TourReservationActionButton";
 import {
   getInsuranceStatus,
   getOriginNameInPersian,
   getVehicleNameInPersian,
 } from "@/core/utils/hepler";
-// import Image from "next/image";
-// import React from "react";
-// import toast from "react-hot-toast";
+import BusVehicle from "@/public/icons/icons/BusVehicle";
+import DepartureDate from "@/public/icons/icons/DepartureDate";
+import MapIcon from "@/public/icons/icons/MapIcon";
+import MedalStarIcon from "@/public/icons/icons/MedalStarIcon";
+import OriginIcon from "@/public/icons/icons/OriginIcon";
+import SecurityIcon from "@/public/icons/icons/SecurityIcon";
+import UsersProfileIcon from "@/public/icons/icons/UsersProfileIcon";
+import UserTickIcon from "@/public/icons/icons/UserTickIcon";
 
 
 export const metadata = {
@@ -66,55 +72,55 @@ async function TourDetails(props) {
   } = data;
 
   const options = [
-    { icon: "/icons/user-tick.svg", label: "تورلیدر از مبدا" },
-    { icon: "/icons/map.svg", label: "برنامه سفر" },
-    { icon: "/icons/medal-star.svg", label: "تضمین کیفیت" },
+    { icon: <UserTickIcon />, label: "تورلیدر از مبدا" },
+    { icon: <MapIcon />, label: "برنامه سفر" },
+    { icon: <MedalStarIcon />, label: "تضمین کیفیت" },
   ];
   const features = [
     {
-      icon: "/icons/bus.svg",
+      icon: <BusVehicle />,
       label: "حمل و نقل",
       value: getVehicleNameInPersian(fleetVehicle),
     },
     {
-      icon: "/icons/users-profile.svg",
+      icon: <UsersProfileIcon />,
       label: "ظرفیت",
       value: `حداکثر ${availableSeats} نفر`,
     },
     {
-      icon: "/icons/security.svg",
+      icon: <SecurityIcon />,
       label: "بیمه",
       value: getInsuranceStatus(insurance),
     },
   ];
   const featuresDesktop = [
     {
-      icon: "/icons/entrance.svg",
+      icon: <OriginIcon />,
       label: "مبدا",
       value: getOriginNameInPersian(entrance),
     },
     {
-      icon: "/icons/departureDate.svg",
+      icon: <DepartureDate />,
       label: "تاریخ رفت",
-      value: startDate,
+      value: startDate.split("T")[0],
     },
     {
-      icon: "/icons/returnDate.svg",
+      icon: <DepartureDate />,
       label: " تاریخ برگشت ",
-      value: endDate,
+      value: endDate.split("T")[0],
     },
     {
-      icon: "/icons/bus.svg",
+      icon: <BusVehicle />,
       label: "حمل و نقل",
       value: getVehicleNameInPersian(fleetVehicle),
     },
     {
-      icon: "/icons/users-profile.svg",
+      icon: <UsersProfileIcon />,
       label: "ظرفیت",
       value: `حداکثر ${availableSeats} نفر`,
     },
     {
-      icon: "/icons/security.svg",
+      icon: <SecurityIcon />,
       label: "بیمه",
       value: getInsuranceStatus(insurance),
     },
@@ -122,7 +128,7 @@ async function TourDetails(props) {
 
   return (
     <>
-      <div className="mx-auto mt-[2rem] md:rounded-md md:border md:border-solid md:border-borderColor md:p-[2rem] ">
+      <div className="md:w-full mx-auto mt-[2rem] md:rounded-md md:border md:border-solid md:border-borderColor md:p-[2rem] ">
         <div className="flex flex-col mx-auto md:flex md:flex-row md:gap-10 ">
           {/* Image */}
           <img
@@ -143,7 +149,7 @@ async function TourDetails(props) {
             <div className="flex justify-between md:gap-10">
               {options.map(({ icon, label }, index) => (
                 <div key={index} className="flex items-center gap-[1rem]">
-                  <img src={icon} className="w-[1.4rem] h-[1.4rem]" alt={label} />
+                  {icon}
                   <p className="text-textLightColor text-[1.3rem]">{label}</p>
                 </div>
               ))}
@@ -160,12 +166,14 @@ async function TourDetails(props) {
             </div>
 
             {/* Action */}
-            <ReservationCard
-              label="رزرو و خرید "
-              status="reservation"
-              price={price}
-              classNames="text-priceColor"
-            />
+
+            <div className='flex items-center justify-between pt-[1rem] '>
+              <TourReservationActionButton tourId={params.id} />
+              <p className="text-priceColor">{price} تومان</p>
+            </div>
+
+
+
           </div>
         </div>
         {/* desktop Features */}
