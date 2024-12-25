@@ -12,7 +12,7 @@ function Layout({ children }) {
                         <Image className="w-full" src="/images/heroPic.png" width={2000} height={2000} />
                   </div>
                   {/* main */}
-                  <main className='px-[3rem] md:px-[10rem] mx-auto'>{children}</main>
+                  <main className='px-[3rem] flex flex-col items-center md:px-[10rem] mx-auto'>{children}</main>
                   {/* footer */}
                   <Footer />
             </>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DatePicker } from "zaman";
 
@@ -9,6 +9,9 @@ import toast from "react-hot-toast";
 import { useUpdateUserBankAccount } from "@/core/services/mutations";
 import { personalInformationSchema } from "@/core/schema";
 import EditIcon from "@/public/icons/icons/EditIcon";
+import { DateToIso, flattenObject, getGenderInPersian } from "@/core/utils/hepler";
+import Button from "@/components/ui/atoms/Button";
+import { convertLength } from "@mui/material/styles/cssUtils";
 
 function UserPersonalInfoForm({ data }) {
       const { firstName, lastName, gender, birthDate, nationalCode } = data;
@@ -20,6 +23,7 @@ function UserPersonalInfoForm({ data }) {
       const {
             register,
             handleSubmit,
+            control,
             setValue,
             formState: { errors },
       } = useForm({
@@ -27,13 +31,40 @@ function UserPersonalInfoForm({ data }) {
       });
 
       // Function to submit form 
-      const submitHandler = (data) => {
-            console.log(data)
+      const submitHandler = (form) => {
+            const splitFullName = form.name.trim().split(" ");
+            const firstName = splitFullName[0] || ""; // Get first name or empty string
+            const lastName = splitFullName.slice(1).join(" ") || ""; // Get last name or empty string
+
+            // Prepare the data to be sent
+            const updatedData = {
+                  ...form,
+                  firstName,
+                  lastName,
+            };
+            const flattenedData = flattenObject(updatedData)
+            console.log(flattenedData)
+            if (isPending) return; // Prevent submission if pending
+
+            mutate(flattenedData, {
+                  onSuccess: (response) => {
+                        toast.success(response?.data?.message);
+                        setIsEditing(false); // Optio
+                  },
+                  onError: (error) => {
+                        toast.error(`مشکلی پیش آمده است لطفا مجدد تلاش کنید.: ${error.message}`);
+
+                  }
+            })
       };
       // Function to handle edit button 
       const handleEditClick = () => {
             setIsEditing(true);
             // Set form values to existing data for editing
+            setValue("name", `${firstName} ${lastName}`); // Set the full name in the input
+            setValue("nationalCode", nationalCode); // Set the national code
+            setValue("gender", gender); // Set the gender
+            setValue("birthDate", birthDate); // Set the birth date
 
       };
 
@@ -48,7 +79,7 @@ function UserPersonalInfoForm({ data }) {
                         />
                   ) : (
                         <p className="flex items-center gap-4">
-                              <span>{label}</span>
+                              <span>{label}:</span>
                               <span>{value || "-"}</span>
                         </p>
                   )}
@@ -62,18 +93,59 @@ function UserPersonalInfoForm({ data }) {
 
 
       return (
-            <form className='flex flex-col border border-borderDivColor rounded-2xl p-[1.5rem] gap-[1rem] md:h-[24rem]'>
+            <form onSubmit={handleSubmit(submitHandler)} className='flex flex-col border border-borderDivColor rounded-2xl p-[1.5rem] gap-[1rem] md:h-[28rem]'>
                   <h2>اطلاعات شخصی</h2>
-                  <div>
-                        {renderInputField("name", "نام و نام خانوادگی ", 30, name)}
+                  <div className="flex flex-row flex-wrap item-center justify-between gap-10">
+
+                        {/* name and national code */}
+                        {renderInputField("name", "نام و نام خانوادگی ", 30, firstName + " " + lastName)}
                         {renderInputField("nationalCode", "شماره ملی ", 10, nationalCode)}
-                        <DatePicker onChange={(e) => console.log(e.value)} />
+
+
+                        {/* select birth date */}
+                        {isEditing ? (<Controller
+                              control={control}
+                              name="birthDate"
+                              render={({ field: { onChange } }) => (
+                                    <DatePicker
+                                          accentColor="#28A745"
+                                          round="x2"
+                                          inputClass="w-[25rem] h-[4.5rem] border  md:rounded-[0.5rem] "
+                                          onChange={(e) =>
+                                                onChange({
+                                                      birthDate: (DateToIso(e.value)).split('T')[0],
+                                                })
+
+                                          }
+                                    />
+                              )}
+                        />) : (
+                              <p className="flex items-center gap-4">
+                                    <span>تاریخ : </span>
+                                    <span>{birthDate || "-"}</span>
+                              </p>
+                        )}
+
+
+
+                        {/* select gender */}
+                        {isEditing ? (<select defaultValue="" {...register("gender")} className="md:border md:rounded-[0.5rem] md:p-[0.8rem] w-[25rem] h-[4.5rem]">
+                              <option value="" disabled >جنسیت</option>
+                              <option value="male">مرد</option>
+                              <option value="female">زن</option>
+                        </select>) : (<p className="flex items-center gap-4">
+                              <span>جنسیت : </span>
+                              <span>{getGenderInPersian(gender) || "-"}</span>
+                        </p>)}
+
+
+
 
 
 
                   </div>
 
-
+                  {/* button actions */}
                   <div className="flex items-center justify-end gap-2 md:border-t md:pt-[2rem]">
                         {isEditing ? (
                               <>

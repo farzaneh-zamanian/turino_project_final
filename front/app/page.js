@@ -1,6 +1,5 @@
 import SearchToursForm from "@/components/templates/SearchToursForm";
 import Card from "@/components/ui/organisms/Card";
-import TourBookingForm from "@/components/ui/organisms/TourBookingForm";
 import { notFound } from 'next/navigation'
 
 
@@ -36,9 +35,9 @@ export default async function Home() {
   // data = data.splice(0, 10);
   return (
     <>
+    <h1 className="font-semibold text-[2.8rem]"><span className="text-primary"> تورینو</span>برگزارکننده بهترین تورهای داخلی و خارجی</h1>
       {/* search box */}
       <SearchToursForm data={data}/>
-       <TourBookingForm data={data} />
       {/* Display tours */}
       <div>
         <div className="py-16  sm:py-24 ">

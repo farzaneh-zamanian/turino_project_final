@@ -1,4 +1,5 @@
 
+
 // const headerUserProfileItems = [
 //       // {
 //       //       href:"/",
@@ -67,6 +68,11 @@ const getOriginNameInPersian = (originName) => {
       return originDestinationTranslations[originName] || originName; // Return the default message
 }
 
+// get gender in persian
+const getGenderInPersian = (gender) => {
+      return gender === 'male' ? 'مرد' : 'زن';
+}
+
 
 // Format the timer to mm:ss
 const formatTheTime = (time) => {
@@ -127,5 +133,5 @@ export {
       getOriginNameInPersian,
       formatTheTime,
       renderUniqueOptions,
-      flattenObject, DateToIso
+      flattenObject, DateToIso,getGenderInPersian
 };

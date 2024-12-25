@@ -35,103 +35,48 @@ function Profile() {
 
 
 
-  // STATE- user profile data
-  const [form, setForm] = useState({
-    "mobile": "",
-    "email": "",
-    "firstName": "",
-    "lastName": "",
-    "gender": "",
-    "birthDate": "",
-    "nationalCode": null,
-    "payment": {
-      "shaba_code": "",
-      "debitCard_code": "",
-      "accountIdentifier": ""
-    }
-  })
-  // STATE- error handling
-  const [isValidate, setIsValidate] = useState({
-    "mobile": "",
-    "email": "",
-    "firstName": "",
-    "lastName": "",
-    "gender": "",
-    "birthDate": "",
-    "nationalCode": "",
-    "payment": {
-      "shaba_code": "",
-      "debitCard_code": "",
-      "accountIdentifier": ""
-    }
-  })
 
   // Get user data
   const { data, isError, error, isLoading } = useGetUserData()
 
-  useEffect(() => {
-    if (data) {
-      setForm((form) => ({
-        ...form,
-        mobile: data.mobile,
-      }));
-    }
-  }, [data]);
 
-  const changeHandler = (event) => {
-    const { name, value } = event.target;
-    const errorValidation = validateInput(name, value);
-    setIsValidate((isValidate) => ({ ...isValidate, [name]: errorValidation }))
+  // const changeHandler = (event) => {
+  //   const { name, value } = event.target;
+  //   const errorValidation = validateInput(name, value);
+  //   setIsValidate((isValidate) => ({ ...isValidate, [name]: errorValidation }))
 
-    // Handle full name input
-    if (name === "fullName") {
-      const arrFullName = value.trim().split(" ");
-      const firstName = arrFullName[0]
-      const lastName = arrFullName[1]
-      setForm((prev) => ({
-        ...prev,
-        firstName: firstName || "", // Default to empty 
-        lastName: lastName || "" // Default to empty 
-      }));
-    } if (name === "shaba_code" || name === "debitCard_code" || name === "accountIdentifier") {
-
-      setForm((prev) => ({
-        ...prev,
-        payment: {
-          ...prev.payment, // Spread the existing payment properties
-          [name]: value // Use square brackets to set the dynamic property
-        }
-      }));
-
-
-    } else {
-      setForm((prev) => ({
-        ...prev,
-        [name]: value
-      }));
-
-    }
+  //   // Handle full name input
+  //   if (name === "fullName") {
+  //     const arrFullName = value.trim().split(" ");
+  //     const firstName = arrFullName[0]
+  //     const lastName = arrFullName[1]
+  //     setForm((prev) => ({
+  //       ...prev,
+  //       firstName: firstName || "", // Default to empty 
+  //       lastName: lastName || "" // Default to empty 
+  //     }));
+  //   } 
 
 
 
-  }
+  // }
 
-  const handleDateChange = (date) => {
-    // Format the date to "YYYY-MM-DD" for database storage
-    const formattedDate = date.format("YYYY-MM-DD");
-    setForm((prev) => ({ ...prev, birthDate: formattedDate }));
-  };
+  // const handleDateChange = (date) => {
+  //   // Format the date to "YYYY-MM-DD" for database storage
+  //   const formattedDate = date.format("YYYY-MM-DD");
+  //   setForm((prev) => ({ ...prev, birthDate: formattedDate }));
+  // };
 
 
 
 
 
 
-  const submitHandler = (event) => {
-    event.preventDefault();
-    console.log(form);
-    // Add form submission logic here
-  };
+  // const submitHandler = (event) => {
+  //   event.preventDefault();
+  //   console.log(form);
+  //   // Add form submission logic here
+  // };
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error.message}</div>;
