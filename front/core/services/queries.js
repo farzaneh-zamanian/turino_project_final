@@ -16,12 +16,22 @@ const useGetUserData = () => {
 }
 
 // Get tour accordign user search
+// enabled flase because with an action we need to get the tour
 const useGetSearchedTours = (query) => {
       const url = "tour?" + QueryString.stringify(query);
       const queryFn = () => api.get(url);
       const queryKey = ["tour", query];
       return useQuery({ queryFn, queryKey, enabled: false });//request doesnot work till we click a button 
 };
+
+// Get Basket tour information
+const useGetBasket = () => {
+      const queryFn = () => api.get("/basket");
+      const queryKey = ["user-basket"];
+    
+      return useQuery({ queryFn, queryKey });
+    };
+
 
 const useGetUserTour = (tourId) => {
       const queryKey = ["user-data", tourId];
@@ -33,7 +43,9 @@ const useGetUserTour = (tourId) => {
 }
 
 
+    
+
 // Get tour details according tour id 
 
 
-export { useGetUserData, useGetSearchedTours, useGetUserTour };
+export { useGetUserData, useGetSearchedTours,useGetBasket, useGetUserTour };

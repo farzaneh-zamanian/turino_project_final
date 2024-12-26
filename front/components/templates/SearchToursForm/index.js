@@ -67,7 +67,6 @@ function SearchToursForm({ data }) {
                                                             endDate: DateToIso(e.to),
                                                       })
                                                 } range
-
                                           />
                                     )}
                               />

@@ -5,7 +5,7 @@ function AdvertisementSection() {
   return (
       <section className='w-[32.7rem] md:w-full my-[5rem]' >
       <div className='flex flex-col  md:flex-row   '>
-        <div className='h-[12.8rem] md:h-[24rem] relative md:flex-auto bg-primary flex   justify-between rounded-t-2xl'>
+        <div className='h-[12.8rem] md:h-[24rem] relative md:flex-auto bg-primary flex   justify-between rounded-t-2xl md:border-r-0 md:rounded-none md:rounded-tr-2xl md:rounded-br-2xl'>
           <div className='flex flex-col items-start gap-4 pr-[1.5rem] pt-[2rem]'>
             <h3 className='text-[2.2rem] md:text-[4.8rem] leading-[3.4rem] md:leading-[7.44rem] font-extrabold text-white'>خرید تلفیقی از <span className='text-secondary'>تورینو</span></h3>
             <h4 className='text-[1.4rem] md:text-[3.2rem] text-white  leading-[2.17rem] md:leading-[4.96rem]'>به هرجا که میخواهید!</h4>

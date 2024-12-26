@@ -1,6 +1,8 @@
 import IconDescriptionCard from "@/components/ui/molecules/IconDescriptionCard";
-import TourReservationActionButton from "@/components/ui/organisms/TourReservationActionButton";
+import TourReservationButton from "@/components/ui/organisms/TourReservationButton";
+import { serverFetch } from "@/core/services/http";
 import {
+  calculateDuration,
   getInsuranceStatus,
   getOriginNameInPersian,
   getVehicleNameInPersian,
@@ -14,7 +16,7 @@ import SecurityIcon from "@/public/icons/icons/SecurityIcon";
 import UsersProfileIcon from "@/public/icons/icons/UsersProfileIcon";
 import UserTickIcon from "@/public/icons/icons/UserTickIcon";
 
-
+// page title
 export const metadata = {
   title: "Tour details",
   description: "Tourism tour booking",
@@ -22,41 +24,12 @@ export const metadata = {
 
 };
 
-
-async function TourDetails(props) {
-
-  // Variables for fetching data
-  let data = [];
-  let fetchError = null;
-
-  // Get product id
-  const { params } = props;
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour/${params.id}`);
-    if (!res.ok) {
-      if (res.status === 404) {
-        return notFound(); // Redirect to 404 page
-      }
-      throw new Error("Failed to fetch data");
-    }
-
-    // Parse the JSON response
-    data = await res.json();
-  } catch (err) {
-    fetchError = err; // Store the error for later use
-  }
-  // if (fetchError) {
-  //   return <div className="error">Error: {fetchError.message}</div>;
-  // }
-
-  if (!data) {
-    return <div className="loading">Loading...</div>;
-  }
-
-
-
-
-
+// SSR page
+async function TourDetails({ params }) {
+  // fetching tour data according tour id
+  const data = await serverFetch(`/tour/${params.id}`, null, {
+    cache: "no-store",
+  });
 
   const {
     image,
@@ -136,14 +109,12 @@ async function TourDetails(props) {
             className="w-full rounded-lg md:w-[30rem] h-[20rem]"
             layout="responsive"
           />
-
           {/* Description */}
           <div className="flex flex-col gap-5">
             <div className="flex justify-between items-center md:flex-col md:items-start">
               <h2 className="text-[2.4rem] font-bold">{title}</h2>
-              <span>5 روز و 4 شب</span>
+              <span>{calculateDuration(startDate, endDate)}</span>
             </div>
-
             {/* Options */}
             <div className="flex justify-between md:gap-10">
               {options.map(({ icon, label }, index) => (
@@ -153,7 +124,6 @@ async function TourDetails(props) {
                 </div>
               ))}
             </div>
-
             {/* mobile Features */}
             <div className="flex justify-between md:hidden">
               {features.map(({ icon, label, value }, index) => (
@@ -164,14 +134,11 @@ async function TourDetails(props) {
               ))}
             </div>
 
-            {/* Action */}
-
+            {/* client side action button*/}
             <div className='flex items-center justify-between pt-[1rem] '>
-              <TourReservationActionButton tourId={params.id} />
+              <TourReservationButton tourId={params.id} />
               <p className="text-priceColor">{price} تومان</p>
             </div>
-
-
 
           </div>
         </div>
@@ -190,13 +157,6 @@ async function TourDetails(props) {
           ))}
         </div>
       </div>
-
-
-
-      {/* Display error message */}
-      {fetchError && (
-        <div className="mt-4 text-red-500 text-center">Error: {fetchError.message}</div>
-      )}
 
     </>
 

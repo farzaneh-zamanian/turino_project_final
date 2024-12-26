@@ -106,15 +106,9 @@ function calculateDuration(startDate, endDate) {
       const nights = differenceInDays - 1;
 
       // Return the formatted string
-      return `    ${differenceInDays}روز${nights}شب`
-      // return `${differenceInDays} روز و  شب`;
+      return `     ${differenceInDays}روز و ${nights}شب`
 }
 
-// Example usage
-const startDate = "2024-12-01T00:00:00.000Z";
-const endDate = "2024-12-05T00:00:00.000Z";
-const duration = calculateDuration(startDate, endDate);
-console.log(duration); // Output: "4 روز و 3 شب"
 
 export {
       getVehicleNameInPersian,

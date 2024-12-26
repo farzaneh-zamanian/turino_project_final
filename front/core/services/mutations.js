@@ -36,20 +36,18 @@ const useUpdateUserBankAccount = () => {
   return useMutation({ mutationFn, onSuccess });
 };
 
-// PUT - tour reservation request
-const useUpdateUserTour = () => {
+// PUT - add tour to the basket
+const useAddTourToBasket = () => {
   const queryClient = useQueryClient();
   const mutationFn = (tourId) => api.put(`basket/${tourId}`);
   const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: ["user-data"] });
   };
-
   return useMutation({ mutationFn, onSuccess });
 
 }
-
-// POST - passenger info request 
-const useUpdatePassenger = () => {
+// POST - check out the tour
+const useCheckout = () => {
   const queryClient = useQueryClient();
   const mutationFn = (data) => api.post("/order", data);
   const onSuccess = () => {
@@ -59,4 +57,11 @@ const useUpdatePassenger = () => {
 }
 
 
-export { useSendOtp, useCheckOtp, useUpdateUserBankAccount, useUpdateUserTour, useUpdatePassenger };
+
+export {
+  useSendOtp,
+  useCheckOtp,
+  useUpdateUserBankAccount,
+  useAddTourToBasket,
+  useCheckout,
+};
