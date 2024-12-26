@@ -48,5 +48,15 @@ const useUpdateUserTour = () => {
 
 }
 
+// POST - passenger info request 
+const useUpdatePassenger = () => {
+  const queryClient = useQueryClient();
+  const mutationFn = (data) => api.post("/order", data);
+  const onSuccess = () => {
+    queryClient.invalidateQueries({ queryKey: ["user-data"] });
+  };
+  return useMutation({ mutationFn, onSuccess });
+}
 
-export { useSendOtp, useCheckOtp, useUpdateUserBankAccount, useUpdateUserTour };
+
+export { useSendOtp, useCheckOtp, useUpdateUserBankAccount, useUpdateUserTour, useUpdatePassenger };

@@ -26,7 +26,7 @@ const bankAcountSchema = object({
 });
 
 const personalInformationSchema = object({
-  name: string()
+  fullName: string()
     .required("نام و نام خانوادگی را وارد کنید") // Required field message
     .min(3, "نام میتواند حداقل ۳ کاراکتر باشد") // Minimum length validation message
     .max(20, "نام میتواند حداکثر ۲۰ کاراکتر باشد") // Maximum length validation message

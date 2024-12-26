@@ -12,7 +12,7 @@ function Card({ tour }) {
 
       return (
             <>
-                  <div class=" w-full relative bg-white border border-solid rounded-md  border-borderColor p-[1rem]">
+                  <section class=" w-full relative bg-white border border-solid rounded-md  border-borderColor p-[1rem]">
                         <img src={image} className=" w-full rounded-md  object-cover group-hover:opacity-75 md:aspect-square lg:aspect-auto lg:h-80 transition-default" />
                         <div className="mt-4 flex flex-col justify-between">
                               <div className='border border-solid pb-[1rem] border-x-0 border-t-0 border-borderColor'>
@@ -28,7 +28,7 @@ function Card({ tour }) {
                               </div>
                               <ReservationCard label="رزرو" status="reservation" price={price} classNames="text-[1.3rem] font-medium text-gray-900" />
                         </div>
-                  </div>
+                  </section>
             </>
 
 

@@ -1,6 +1,7 @@
+import { notFound } from 'next/navigation'
+
 import SearchToursForm from "@/components/templates/SearchToursForm";
 import Card from "@/components/ui/organisms/Card";
-import { notFound } from 'next/navigation'
 
 
 
@@ -11,7 +12,9 @@ export default async function Home() {
 
 
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/tour`,{
+      // cache:"no-store"
+    });
     // Check if the response is ok (status in the range 200-299)
     if (!res.ok) {
       if (res.status === 404) {

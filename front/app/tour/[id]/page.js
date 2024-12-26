@@ -1,5 +1,4 @@
 import IconDescriptionCard from "@/components/ui/molecules/IconDescriptionCard";
-import ReservationCard from "@/components/ui/molecules/ReservationCard";
 import TourReservationActionButton from "@/components/ui/organisms/TourReservationActionButton";
 import {
   getInsuranceStatus,

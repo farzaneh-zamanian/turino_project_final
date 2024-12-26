@@ -30,7 +30,7 @@ function UserPersonalInfoForm({ data }) {
 
       // Function to submit form 
       const submitHandler = (form) => {
-            const [firstName, ...lastNameParts] = form.name.trim().split(" ");
+            const [firstName, ...lastNameParts] = form.fullName.trim().split(" ");
             const lastName = lastNameParts.join(" ") || ""; // Join remaining parts for last name
 
             // data to be sent to server
@@ -57,7 +57,7 @@ function UserPersonalInfoForm({ data }) {
       // Function to handle edit button 
       const handleEditClick = () => {
             setIsEditing(true);
-            setValue("name", `${firstName} ${lastName}`); // Set the full name in the input
+            setValue("fullName", `${firstName} ${lastName}`); // Set the full name in the input
             setValue("nationalCode", nationalCode); // Set the national code
             setValue("gender", gender); // Set the gender
             setValue("birthDate", birthDate); // Set the birth date
@@ -94,7 +94,7 @@ function UserPersonalInfoForm({ data }) {
                   <div className="flex flex-row flex-wrap item-center justify-between gap-10">
 
                         {/* name and national code */}
-                        {renderInputField("name", "نام و نام خانوادگی ", 30, firstName + " " + lastName)}
+                        {renderInputField("fullName", "نام و نام خانوادگی ", 30, firstName + " " + lastName)}
                         {renderInputField("nationalCode", "شماره ملی ", 10, nationalCode)}
 
 

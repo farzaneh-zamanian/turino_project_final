@@ -1,11 +1,12 @@
 "use client"
 
-import Button from "@/components/ui/atoms/Button";
-import { useGetTours } from "@/core/services/queries";
-import { DateToIso, flattenObject, renderUniqueOptions } from "@/core/utils/hepler";
+import { DatePicker } from "zaman";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { DatePicker } from "zaman";
+
+import Button from "@/components/ui/atoms/Button";
+import { useGetSearchedTours, useGetTours } from "@/core/services/queries";
+import { DateToIso, flattenObject, renderUniqueOptions } from "@/core/utils/hepler";
 
 
 function SearchToursForm({ data }) {
@@ -17,13 +18,14 @@ function SearchToursForm({ data }) {
             refetch();
       }, [query]);
 
-      const submitHandler = (form) => {            
+      const submitHandler = (form) => {
             // refetch()
-            setQuery(flattenObject(form));//all object of this form send to the flatten function
+            setQuery(flattenObject(form));//flat object
       };
-      const { data: dataTour, isPending, refetch } = useGetTours(query);
+      const { data: dataTour, isPending, refetch } = useGetSearchedTours(query);
+
       console.log(dataTour)
-    
+
       //      if(!dataTour){
       //       toast.error("متاسفانه در این تاریخ تور وجود ندارد")
       //      }
@@ -60,13 +62,7 @@ function SearchToursForm({ data }) {
                                     />
                               )}
                         />
-                      
-
-
-
-
                   </div>
-
                   <Button status="search" label="جستجو" type="submit" />
             </form>
       )

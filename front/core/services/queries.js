@@ -10,22 +10,30 @@ const useGetUserData = () => {
       const queryKey = ["user-data"];
       const queryFn = async () => {
             const response = await api.get("/user/profile");
-            return response.data; 
+            return response.data;
       };
       return useQuery({ queryKey, queryFn });
 }
 
 // Get tour accordign user search
-const useGetTours = (query) => {
+const useGetSearchedTours = (query) => {
       const url = "tour?" + QueryString.stringify(query);
-    
       const queryFn = () => api.get(url);
       const queryKey = ["tour", query];
-    
       return useQuery({ queryFn, queryKey, enabled: false });//request doesnot work till we click a button 
-    };
-    
+};
+
+const useGetUserTour = (tourId) => {
+      const queryKey = ["user-data", tourId];
+      const queryFn = async () => {
+            const response = await api.get(`/tour/${tourId}`);
+            return response.data;
+      };
+      return useQuery({ queryKey, queryFn });
+}
 
 
+// Get tour details according tour id 
 
-export { useGetUserData,useGetTours };
+
+export { useGetUserData, useGetSearchedTours, useGetUserTour };

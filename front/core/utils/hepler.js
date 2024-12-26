@@ -126,6 +126,30 @@ const flattenObject = (obj, delimiter = ".", prefix = "") => {
 
 const DateToIso = (date) => new Date(date).toISOString();
 
+function calculateDuration(startDate, endDate) {
+      // Parse the dates
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+
+      // Calculate the difference in milliseconds
+      const differenceInMs = end - start;
+
+      // Calculate the difference in days
+      const differenceInDays = differenceInMs / (1000 * 60 * 60 * 24);
+
+      // Calculate nights (nights = days - 1)
+      const nights = differenceInDays - 1;
+
+      // Return the formatted string
+      return `    ${differenceInDays}روز${nights}شب`
+      // return `${differenceInDays} روز و  شب`;
+}
+
+// Example usage
+const startDate = "2024-12-01T00:00:00.000Z";
+const endDate = "2024-12-05T00:00:00.000Z";
+const duration = calculateDuration(startDate, endDate);
+console.log(duration); // Output: "4 روز و 3 شب"
 
 export {
       getVehicleNameInPersian,
@@ -133,5 +157,7 @@ export {
       getOriginNameInPersian,
       formatTheTime,
       renderUniqueOptions,
-      flattenObject, DateToIso,getGenderInPersian
+      flattenObject,
+      DateToIso, getGenderInPersian,
+       calculateDuration
 };

@@ -14,7 +14,7 @@
     "title": "تور کردستان",
     "fleetVehicle": "Bus",
     "price": 105000,
-    "availableSeats": 25,
+    "availableSeats": 24,
     "insurance": true,
     "options": [
       "راهنمای تور",
@@ -38,7 +38,7 @@
     "title": "تور مادرید",
     "fleetVehicle": "Van",
     "price": 240000,
-    "availableSeats": 15,
+    "availableSeats": 12,
     "insurance": false,
     "options": [
       "راهنمای تور",
