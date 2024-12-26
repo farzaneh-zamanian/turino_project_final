@@ -2,13 +2,6 @@ import React from 'react'
 import clsx from 'clsx';
 
 
-
-// <Button label="جستجو" status="search" />
-// <Button label="رزرو" status="reservation" />
-// <Button label="ارسال کد تایید" status="submit" />
-// <button className="text-primary h-[4.1rem] border-solid px-8 rounded-[0.5rem]   ">انصراف</button>
-
-
 function Button({ label, status, onClick }) {
   return (
     <button onClick={onClick} className={clsx(

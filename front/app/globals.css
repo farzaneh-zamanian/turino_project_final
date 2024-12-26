@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://v1.fontapi.ir/css/VazirFD');
 
 *,
 *::after,
@@ -18,6 +19,8 @@ html {
 body {
   font-size: 1.5rem;
   line-height: 2.5;
+  font-family: Vazir FD, sans-serif;
+
 }
 
 h1 {

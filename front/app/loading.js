@@ -1,5 +1,5 @@
 
-function LoadingHomePage() {
+function LoadingPage() {
       return (
 
             <div className="flex items-center justify-center fixed w-full h-full" role="status">
@@ -12,4 +12,4 @@ function LoadingHomePage() {
       )
 }
 
-export default LoadingHomePage
+export default LoadingPage

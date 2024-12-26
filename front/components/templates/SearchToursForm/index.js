@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import Button from "@/components/ui/atoms/Button";
-import { useGetSearchedTours, useGetTours } from "@/core/services/queries";
+import { useGetSearchedTours } from "@/core/services/queries";
 import { DateToIso, flattenObject, renderUniqueOptions } from "@/core/utils/hepler";
 
 

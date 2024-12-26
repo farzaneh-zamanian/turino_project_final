@@ -65,7 +65,7 @@
     "insurance": true,
     "options": [
       "نهار و صبحانه",
-      "هفل پنج ستاره"
+      "هتل پنج ستاره"
     ],
     "image": "/static/images/sulaymaniyahTour.png"
   },
@@ -88,7 +88,7 @@
     "insurance": false,
     "options": [
       "نهار و صبحانه",
-      "هفل پنج ستاره"
+      "هتل پنج ستاره"
     ],
     "image": "/static/images/arbilTour.png"
   },
@@ -111,7 +111,7 @@
     "insurance": true,
     "options": [
       "نهار و صبحانه",
-      "هفل پنج ستاره"
+      "هتل پنج ستاره"
     ],
     "image": "/static/images/mazandaranTour.png"
   },
@@ -134,7 +134,7 @@
     "insurance": true,
     "options": [
       "نهار و صبحانه",
-      "هفل پنج ستاره"
+      "هتل پنج ستاره"
     ],
     "image": "/static/images/offroadTour.png"
   },
@@ -157,7 +157,7 @@
     "insurance": true,
     "options": [
       "نهار و صبحانه",
-      "هفل پنج ستاره"
+      "هتل پنج ستاره"
     ],
     "image": "/static/images/italyTour.png"
   }

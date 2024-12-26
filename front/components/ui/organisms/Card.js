@@ -5,28 +5,41 @@ import Button from '../atoms/Button';
 import ReservationCard from '../molecules/ReservationCard';
 
 function Card({ tour }) {
-      // const { id, origin: { originId, name }, destination: { id: destId, name: destName }, startDate, endDate,
-      //       title, fleetVehicle, price, availableSeats, insuranc, options, image } = tour
-      const { id, destination: { name: destName },
-            title, price, image } = tour
+      const { id, title, price, image, options } = tour
 
       return (
             <>
-                  <section class=" w-full relative bg-white border border-solid rounded-md  border-borderColor p-[1rem]">
-                        <img src={image} className=" w-full rounded-md  object-cover group-hover:opacity-75 md:aspect-square lg:aspect-auto lg:h-80 transition-default" />
-                        <div className="mt-4 flex flex-col justify-between">
-                              <div className='border border-solid pb-[1rem] border-x-0 border-t-0 border-borderColor'>
+                  <section class=" w-full relative bg-white">
+                        <img src={image} className=" w-full object-cover group-hover:opacity-75 md:aspect-square lg:aspect-auto lg:h-80 transition-default" />
+                        <div className=" flex flex-col justify-between border border-borderColor border-t-0 rounded-b-3xl">
+                              <div className='pr-4 pb-[0.5rem]'>
                                     <h3 className="text-[1.5rem] font-semibold text-gray-700">
                                           <Link href={`/tour/${id}`} >
                                                 {/* it will cover the entire area of the title, making it easier for users to click on the title */}
                                                 <span aria-hidden="true" className="absolute inset-0">
                                                 </span>
-                                                {title}
+                                                <span className='text-[2.2rem]  font-normal'>{title}</span>
                                           </Link>
                                     </h3>
-                                    <p className="mt-1 text-[1.2rem] text-gray-500">{destName}</p>
+                                    {/* show options seperately */}
+                                    <div className="flex text-[1.5rem] text-gray-500">
+                                          {options.map((option, index) => (
+                                                <span key={index}>
+                                                      {option}
+                                                      {index < options.length - 1 && <span className='px-[0.5rem]'>-</span>}
+                                                </span>
+                                          ))}
+                                    </div>
                               </div>
-                              <ReservationCard label="رزرو" status="reservation" price={price} classNames="text-[1.3rem] font-medium text-gray-900" />
+                              <div className='flex items-center justify-between  border-t-2 py-[0.5rem] px-[1rem]'>
+                                    <Button label="رزرو" status="reservation" />
+                                    <p className="text-[1.3rem] font-medium text-gray-900 text-[#282828CC] flex items-center gap-2">
+                                          <span className='text-priceColor text-[1.6rem]'>
+                                                {price}
+                                          </span>
+                                          <span className='text-[1.2rem] '>تومان</span>
+                                    </p>
+                              </div>
                         </div>
                   </section>
             </>
