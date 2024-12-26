@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import Button from '../atoms/Button';
-import ReservationCard from '../molecules/ReservationCard';
 
 function Card({ tour }) {
       const { id, title, price, image, options } = tour
@@ -10,7 +9,7 @@ function Card({ tour }) {
       return (
             <>
                   <section class=" w-full relative bg-white">
-                        <img src={image} className=" w-full object-cover group-hover:opacity-75 md:aspect-square lg:aspect-auto lg:h-80 transition-default" />
+                        <img src={image} className=" w-full object-cover group-hover:opacity-75 md:aspect-square lg:aspect-auto lg:h-80 transition-default rounded-t-3xl" />
                         <div className=" flex flex-col justify-between border border-borderColor border-t-0 rounded-b-3xl">
                               <div className='pr-4 pb-[0.5rem]'>
                                     <h3 className="text-[1.5rem] font-semibold text-gray-700">
@@ -43,8 +42,6 @@ function Card({ tour }) {
                         </div>
                   </section>
             </>
-
-
       );
 
 }

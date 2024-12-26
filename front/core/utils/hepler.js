@@ -1,37 +1,4 @@
 
-
-// const headerUserProfileItems = [
-//       // {
-//       //       href:"/",
-//       //       figure: {
-//       //             icon: { src: '/icons/userProfile.svg', width: 16, height: 16 },
-//       //             caption: { children: 'mobileNumber', className: 'text-[1.6rem] font-medium' },
-//       //             className: 'p-[0.5rem] rounded-full flex gap-2 ',
-//       //       },
-//       //       className: 'pr-[1rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.4rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1',
-//       // },
-//       {
-//             href: "/userProfile/profile",
-//             figure: {
-//                   icon: { src: '/icons/profile.svg', width: 16, height: 16 },
-//                   caption: { children: 'اطلاعات حساب کاربری', className: 'text-[1.2rem] md:text-[1.4rem] ' },
-//                   className: 'flex gap-2',
-//             },
-//             className: 'pr-[1.5rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.6rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1',
-//       },
-//       {
-//             href: "/",
-//             figure: {
-//                   icon: { src: '/icons/logout.svg', width: 16, height: 16 },
-//                   caption: { children: 'خروج از حساب کاربری', className: 'text-[#D40000] text-[1.2rem] md:text-[1.4rem]' },
-//                   className: 'flex gap-2',
-//             },
-//             className: 'pr-[1.5rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.6rem]',
-//       },
-// ];
-
-
-
 // Get persian vehicle name 
 const vehicleTranslations = {
       "Bus": "اتوبوس",
@@ -44,7 +11,7 @@ const getVehicleNameInPersian = (item) => {
       return vehicleTranslations[item] || item; // Return the translation or the original item if not found
 }
 
-// insurance
+// Get persian  insurance
 const getInsuranceStatus = (insurance) => {
       return typeof insurance === 'boolean'
             ? (insurance ? "بیمه دارد" : "بیمه ندارد")
@@ -88,9 +55,6 @@ const renderUniqueOptions = (data, key) => {
             name: item[key].name,
             id: item[key].id
       }));
-
-
-
       // Step 2: Use Set to filter unique origin names
       const uniqueOriginsSet = new Set();
       const uniqueOrigins = originArray.filter(item => {
@@ -100,7 +64,7 @@ const renderUniqueOptions = (data, key) => {
             }
             return false;
       });
-
+      //Step 3: Use Set to create options
       return uniqueOrigins.map((item, index) => (
             <option key={index} value={item.id}>
                   {getOriginNameInPersian(item.name)}
@@ -108,6 +72,7 @@ const renderUniqueOptions = (data, key) => {
       ));
 };
 
+// Flatten objects
 const flattenObject = (obj, delimiter = ".", prefix = "") => {
       const flattObject = Object.keys(obj).reduce((acc, k) => {
             const pre = prefix.length ? `${prefix}${delimiter}` : "";
@@ -120,14 +85,14 @@ const flattenObject = (obj, delimiter = ".", prefix = "") => {
             else acc[k] = obj[k];
             return acc;
       }, {});
-
       return flattObject;
 };
 
+// Converts the Date object into a string in the ISO format
 const DateToIso = (date) => new Date(date).toISOString();
 
+// Calculate the duration of day and night between start date and end date
 function calculateDuration(startDate, endDate) {
-      // Parse the dates
       const start = new Date(startDate);
       const end = new Date(endDate);
 
@@ -159,5 +124,5 @@ export {
       renderUniqueOptions,
       flattenObject,
       DateToIso, getGenderInPersian,
-       calculateDuration
+      calculateDuration
 };

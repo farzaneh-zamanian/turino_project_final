@@ -3,32 +3,40 @@
 import { DatePicker } from "zaman";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import QueryString from "qs";
+
 
 import Button from "@/components/ui/atoms/Button";
 import { useGetSearchedTours } from "@/core/services/queries";
 import { DateToIso, flattenObject, renderUniqueOptions } from "@/core/utils/hepler";
+import useQuery from "@/core/hooks/query";
 
 
 function SearchToursForm({ data }) {
-      const [query, setQuery] = useState("");//state of query(originId,destination,startDate,endDate)
 
-      const { register, handleSubmit, control } = useForm();
+      const router = useRouter();
+      const { getQuery } = useQuery();
+      const { register, handleSubmit, control , reset} = useForm();
 
+      
+      // const [query, setQuery] = useState("");//state of query(originId,destination,startDate,endDate)
+      // const { data: dataTour, isPending, refetch } = useGetSearchedTours(query);
+      // useEffect(() => {
+      //       refetch();
+      // }, [query]);
+
+      // show default value od serach items
       useEffect(() => {
-            refetch();
-      }, [query]);
+            const originId = getQuery("originId");
+            const destinationId = getQuery("destinationId");
+            if (originId && destinationId) reset({originId, destinationId})
+          }, []);
 
       const submitHandler = (form) => {
-            // refetch()
-            setQuery(flattenObject(form));//flat object
+            const query = QueryString.stringify(flattenObject(form));
+            router.push(`/?${query}`);
       };
-      const { data: dataTour, isPending, refetch } = useGetSearchedTours(query);
-
-      console.log(dataTour)
-
-      //      if(!dataTour){
-      //       toast.error("متاسفانه در این تاریخ تور وجود ندارد")
-      //      }
 
       return (
             <section>
@@ -36,12 +44,12 @@ function SearchToursForm({ data }) {
                         <div className="flex flex-row items-center justify-between gap-5">
                               <select defaultValue="" {...register("originId")} className="w-[16rem] h-[4.7rem] m-2 border rounded-2xl md:rounded-none  md:border-l-2 md:border-y-0 md:border-r-0">
                                     <option value="" disabled>مبدا</option>
-                                    {/* Render Origin options */}
+                                    {/* Render Origin options tag */}
                                     {renderUniqueOptions(data, 'origin')}
                               </select>
                               <select defaultValue=""  {...register("destinationId")} className="w-[16rem] h-[4.7rem] md:m-[1rem]  m-2 border rounded-2xl md:rounded-none  md:border-l-2 md:border-y-0 md:border-r-0">
                                     <option value="" disabled>مقصد</option>
-                                    {/* Render Destination options */}
+                                    {/* Render Destination options tag */}
                                     {renderUniqueOptions(data, 'destination')}
                               </select>
                               {/* integerate datePicker and react hook form */}

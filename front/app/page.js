@@ -7,11 +7,10 @@ import ToursList from '@/components/templates/TourList';
 
 
 // SSR Page
-async function Home() {
+async function Home({searchParams}) {
   // fetching data
-  const data = await serverFetch("/tour")
-  if (!data) return <div className="mt-4 text-red-500 text-center">مشکلی پیش آمده است </div>
-  if (!data.length && !fetchError) return <p>Loading...</p>;
+  const data = await serverFetch("/tour",searchParams, { cache: "no-store" })
+  // if (!data) return <div className="mt-4 text-red-500 text-center">مشکلی پیش آمده است </div>
 
   return (
     <>

@@ -14,7 +14,7 @@ function AdvertisementSection() {
           <img src="/images/onlinePurchasePic.png" className='md:hidden bottom-0 left-0 absolute ' />
 
         </div>
-        <div className='md:flex-col md:justify-center md:flex-auto md:w-16 border rounded-b-2xl flex items-center justify-evenly p-[1rem]'>
+        <div className='md:flex-col md:justify-center md:flex-auto md:w-16 border rounded-b-2xl md:border-r-0 md:rounded-none md:rounded-tl-2xl md:rounded-bl-2xl flex items-center justify-evenly p-[1rem]'>
           <p className='flex items-center gap-4'>
             <span className='text-secondary text-[2rem] md:text-[2.8rem] font-bold'>021-1840</span>
             <span ><CallIcon/></span>
