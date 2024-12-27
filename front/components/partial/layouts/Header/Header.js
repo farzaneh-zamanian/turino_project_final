@@ -1,11 +1,12 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { UserGroupIcon, HomeIcon, DocumentDuplicateIcon, PhoneIcon } from '@heroicons/react/24/outline';
 
+import { UserGroupIcon, HomeIcon, DocumentDuplicateIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
 import { useGetUserData } from '@/core/services/queries';
+import { clearAccessToken } from '@/core/utils/cookie';
 
 const links = [
       { name: 'صفحه اصلی', href: '/', icon: HomeIcon },
@@ -16,15 +17,20 @@ const links = [
 
 const Header = () => {
       let mobileNumber = false;
-     
+
       const [isMenuOpen, setIsMenuOpen] = useState(false);//dropDown state
       const [isVisibleProfile, setIsVisibleUserProfile] = useState(false);
 
-      // const { data, isError, error, isLoading } = useGetUserData()
-      const { data} = useGetUserData()
+      const { data } = useGetUserData()
       mobileNumber = data?.mobile;
 
-      // //! there is problem in scroll the page in desktop
+
+      const logOutHandler = () => {
+            console.log("logout")
+            clearAccessToken()
+            router.push("/")
+      }
+
 
       useEffect(() => {
             document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset';
@@ -34,16 +40,12 @@ const Header = () => {
       }, [isMenuOpen]);
 
 
-      // if (isLoading) return <p>Loading...</p>; // Optional loading state
-      // if (isError) {
-      //       // toast.error(error.message);
-      //       return <p>Something went wrong. Please try again later.</p>; // Fallback UI for errors
-      // }
 
       return (
             <>
                   <MobileHeader links={links}
                         isMenuOpen={isMenuOpen}
+                        onClick={logOutHandler}
                         setIsMenuOpen={setIsMenuOpen}
                         mobileNumber={mobileNumber}
                         isVisibleProfile={isVisibleProfile}
@@ -54,6 +56,7 @@ const Header = () => {
                         mobileNumber={mobileNumber}
                         isVisibleProfile={isVisibleProfile}
                         setIsVisibleUserProfile={setIsVisibleUserProfile}
+                        onClick={logOutHandler}
                   />
             </>
       );

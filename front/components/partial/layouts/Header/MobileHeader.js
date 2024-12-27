@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 import AuthForm from '@/components/templates/authForm';
-import { useRouter } from 'next/navigation';
 import HamburgerMenu from '@/public/icons/icons/HamburgerMenu';
 import UserProfileDropdown from '@/components/templates/UserProfileDropdown';
 
@@ -14,11 +13,10 @@ import UserProfileDropdown from '@/components/templates/UserProfileDropdown';
 
 
 
-const MobileHeader = ({ links, isMenuOpen, setIsMenuOpen, mobileNumber,
+const MobileHeader = ({ links,onClick, isMenuOpen, setIsMenuOpen, mobileNumber,
   setIsVisibleUserProfile, isVisibleProfile }) => {
 
   const pathname = usePathname();
-  const router = useRouter()
 
 
   const toggleMenu = () => setIsMenuOpen(prev => !prev);
@@ -27,13 +25,7 @@ const MobileHeader = ({ links, isMenuOpen, setIsMenuOpen, mobileNumber,
     setIsVisibleUserProfile((isVisibleProfile) => !isVisibleProfile); // Toggle visibility
   }
 
-  const logOutHandler = () => {
-    console.log("logout")
-    // Clear tokens and redirect to home
-    // localStorage.removeItem('accessToken');
-    // localStorage.removeItem('refreshToken');
-    router.push("/")
-  }
+
 
   return (
     <>
@@ -49,7 +41,7 @@ const MobileHeader = ({ links, isMenuOpen, setIsMenuOpen, mobileNumber,
                 mobileNumber={mobileNumber}
                 isVisibleProfile={isVisibleProfile}
                 toggleUserProfileVisibility={toggleUserProfileVisibility}
-                logOutHandler={logOutHandler}
+                logOutHandler={onClick}
               />
             )
             : (
@@ -76,7 +68,7 @@ const MobileHeader = ({ links, isMenuOpen, setIsMenuOpen, mobileNumber,
                       )}
                     >
                       <LinkIcon className="w-6" />
-                      <p className='text-[1.6rem]'>{name}</p>
+                      <p className='text-[1.6rem] font-normal'>{name}</p>
                     </Link>
                   </li>
                 ))}

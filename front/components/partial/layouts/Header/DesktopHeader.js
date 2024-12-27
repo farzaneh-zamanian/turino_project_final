@@ -13,21 +13,14 @@ import UserProfileDropdown from '@/components/templates/UserProfileDropdown';
 
 
 
-const DesktopHeader = ({ links, mobileNumber, isVisibleProfile, setIsVisibleUserProfile }) => {
+const DesktopHeader = ({ links,onClick, mobileNumber, isVisibleProfile, setIsVisibleUserProfile }) => {
   const pathname = usePathname();
-  const router = useRouter()
 
   // toggle drop down menu
   const toggleUserProfileVisibility = () => {
     setIsVisibleUserProfile((isVisibleProfile) => !isVisibleProfile); // Toggle visibility
   }
-  const logOutHandler = () => {
-    console.log("logout")
-    // Clear tokens and redirect to home
-    // localStorage.removeItem('accessToken');
-    // localStorage.removeItem('refreshToken');
-    router.push("/")
-  }
+ 
 
   return (
     <header className=" px-[10rem] py-[2rem] hidden md:flex items-center justify-between">
@@ -49,7 +42,7 @@ const DesktopHeader = ({ links, mobileNumber, isVisibleProfile, setIsVisibleUser
                 )}
               >
                 <LinkIcon className="w-6" />
-                <p className="hidden md:block">{name}</p>
+                <p className="hidden md:block text-[1.6rem] font-normal">{name}</p>
               </Link>
             </li>
           ))}
@@ -61,7 +54,7 @@ const DesktopHeader = ({ links, mobileNumber, isVisibleProfile, setIsVisibleUser
           mobileNumber={mobileNumber}
           isVisibleProfile={isVisibleProfile}
           toggleUserProfileVisibility={toggleUserProfileVisibility}
-          logOutHandler={logOutHandler}
+          logOutHandler={onClick}
         />
       ) : (
         <AuthForm />

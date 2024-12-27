@@ -18,6 +18,12 @@ function getCookie(name) {
   const parts = value?.split(`; ${name}=`);
   if (parts?.length === 2) return parts?.pop()?.split(";")?.shift();
 }
+function clearAccessToken() {
+  // Set the accessToken cookie with an expiration date in the past
+  document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
 
-export { setCookie, getCookie };
+
+
+export { setCookie, getCookie,clearAccessToken };
 

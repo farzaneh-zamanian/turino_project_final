@@ -54,7 +54,7 @@ function AuthForm() {
       </div>
 
       {/* Mobile login button */}
-      <button onClick={openModal} className='md:hidden text-primary flex items-center'>
+      <button onClick={openModal} className='md:hidden text-primary flex items-center '>
         <SignInBtn />
       </button>
 

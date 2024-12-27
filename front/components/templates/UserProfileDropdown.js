@@ -1,17 +1,24 @@
+import Link from 'next/link'
+import React from 'react'
+
 import ArrowDown from '@/public/icons/icons/ArrowDown'
 import LogOut from '@/public/icons/icons/LogOut'
 import UserLogin from '@/public/icons/icons/UserLogin'
 import UserProfile from '@/public/icons/icons/UserProfile'
 import UserProfilePage from '@/public/icons/icons/UserProfilePage'
-import Link from 'next/link'
-import React from 'react'
 
-function UserProfileDropdown ({ mobileNumber, isVisibleProfile, toggleUserProfileVisibility, logOutHandler }) {
+function UserProfileDropdown({ mobileNumber, isVisibleProfile, toggleUserProfileVisibility, logOutHandler }) {
+
+  // Close the dropdown
+  const handleLinkClick = () => {
+    toggleUserProfileVisibility();
+  };
+
   return (
-      <div className='relative border border-primary rounded-lg w-[18rem] h-[4.4rem] flex flex-col items-center'>
+    <div className='relative md:border md:border-primary rounded-lg w-[18rem] h-[4.4rem] flex flex-col items-center'>
       <div onClick={toggleUserProfileVisibility} className='cursor-pointer text-primary flex justify-center items-center gap-1'>
         <UserLogin />
-        <span className='text-[1.2rem] md:text-[1.8rem]'>{mobileNumber}</span>
+        <span className='text-[1.5rem] md:text-[1.8rem]'>{mobileNumber}</span>
         <ArrowDown />
       </div>
       {isVisibleProfile && (
@@ -22,11 +29,11 @@ function UserProfileDropdown ({ mobileNumber, isVisibleProfile, toggleUserProfil
             </div>
             <span className='md:text-[1.6rem]  text-[1.4rem] font-medium'>{mobileNumber}</span>
           </div>
-          <Link href="/userProfile/profile" className='pr-[1.5rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.6rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1'>
+          <Link href="/userProfile" onClick={handleLinkClick} className='pr-[1.5rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.6rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1'>
             <UserProfilePage />
             <span className='md:text-[1.6rem] text-[1.4rem] font-medium'> اطلاعات حساب کاربری</span>
           </Link>
-  
+
           <Link href="/" onClick={logOutHandler} className='pr-[1.5rem] hover:bg-hoverBgColor transition-default flex gap-2 items-center h-[4.6rem] border border-solid border-[#0000001F] border-t-0 border-x-0 border-1'>
             <LogOut />
             <span className=' md:text-[1.6rem] text-[1.4rem] font-medium'> خروج از حساب کاربری</span>

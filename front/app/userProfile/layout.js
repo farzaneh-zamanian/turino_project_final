@@ -13,7 +13,7 @@ import AuthProvider from '@/components/partial/providers/AuthProvider';
 
 
 const links = [
-      { name: 'پروفایل ', href: '/userProfile/profile', icon: <UserProfile /> },
+      { name: 'پروفایل ', href: '/userProfile', icon: <UserProfile /> },
       { name: 'تورهای من ', href: '/userProfile/tours', icon: <TourIcon /> },
       { name: 'تراکنش ها ', href: '/userProfile/transaction', icon: <TransactionIcon /> },
 ];
