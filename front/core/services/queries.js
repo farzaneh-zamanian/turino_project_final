@@ -28,9 +28,9 @@ const useGetSearchedTours = (query) => {
 const useGetBasket = () => {
       const queryFn = () => api.get("/basket");
       const queryKey = ["user-basket"];
-    
+
       return useQuery({ queryFn, queryKey });
-    };
+};
 
 
 const useGetUserTour = (tourId) => {
@@ -42,10 +42,30 @@ const useGetUserTour = (tourId) => {
       return useQuery({ queryKey, queryFn });
 }
 
+const useGetUserAllTours = () => {
+      const queryFn = () => api.get("user/tours");
+      const queryKey = ["user-tours"];
 
-    
+      return useQuery({ queryFn, queryKey });
+};
 
-// Get tour details according tour id 
+
+const useGetUserTransactions = () => {
+      const queryFn = () => api.get("user/transactions");
+      const queryKey = ["user-transaction"];
+
+      return useQuery({ queryFn, queryKey });
+};
 
 
-export { useGetUserData, useGetSearchedTours,useGetBasket, useGetUserTour };
+
+
+
+
+
+
+
+export {
+      useGetUserData, useGetSearchedTours, useGetBasket,
+      useGetUserTransactions, useGetUserTour, useGetUserAllTours
+};

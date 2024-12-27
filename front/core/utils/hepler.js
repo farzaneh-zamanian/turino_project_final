@@ -1,3 +1,4 @@
+import moment from 'moment-jalaali';
 
 // Get persian vehicle name 
 const vehicleTranslations = {
@@ -109,6 +110,13 @@ function calculateDuration(startDate, endDate) {
       return `     ${differenceInDays}روز و ${nights}شب`
 }
 
+function convertToPersianDate(dateString) {
+      const persianDate = moment(dateString).locale('fa')
+      .format('HH:mm:ss jYYYY/jM/jD'); 
+      return persianDate;
+    }
+    
+
 
 export {
       getVehicleNameInPersian,
@@ -118,5 +126,6 @@ export {
       renderUniqueOptions,
       flattenObject,
       DateToIso, getGenderInPersian,
-      calculateDuration
+      calculateDuration,
+      convertToPersianDate
 };
