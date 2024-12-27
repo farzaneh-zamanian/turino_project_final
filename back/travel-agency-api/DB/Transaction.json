@@ -1,53 +1,5 @@
 [
-  {
-    "id": "b8658ad4-0f9e-4f74-b549-88e926a64e9a",
-    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
-    "amount": 240000,
-    "type": "Purchase",
-    "createdAt": "2024-12-25T14:54:41.306Z"
-  },
-  {
-    "id": "f492d07a-35f3-46fc-a933-175b76f63ef1",
-    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
-    "amount": 240000,
-    "type": "Purchase",
-    "createdAt": "2024-12-25T15:03:24.910Z"
-  },
-  {
-    "id": "281dda16-6d50-4f66-b0b2-e366ea097817",
-    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
-    "amount": 240000,
-    "type": "Purchase",
-    "createdAt": "2024-12-25T15:09:25.978Z"
-  },
-  {
-    "id": "088c84ad-1b9c-41cc-8b4e-5f3270e5f4ea",
-    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
-    "amount": 105000,
-    "type": "Purchase",
-    "createdAt": "2024-12-26T07:50:34.056Z"
-  },
-  {
-    "id": "c2ba12b1-d128-4319-bbb9-564ab00534c3",
-    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
-    "amount": 105000,
-    "type": "Purchase",
-    "createdAt": "2024-12-26T19:52:19.411Z"
-  },
-  {
-    "id": "e31fedfa-2491-42bd-a55d-2fd7daace977",
-    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
-    "amount": 105000,
-    "type": "Purchase",
-    "createdAt": "2024-12-26T19:54:58.972Z"
-  },
-  {
-    "id": "d62f3361-4b0c-42f2-915f-2050cfe4cdd4",
-    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
-    "amount": 105000,
-    "type": "Purchase",
-    "createdAt": "2024-12-26T19:58:23.881Z"
-  },
+
   {
     "id": "6b6a3405-2e95-4d49-bb62-471c82176a6c",
     "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
@@ -76,20 +28,7 @@
     "type": "Purchase",
     "createdAt": "2024-12-27T07:20:25.523Z"
   },
-  {
-    "id": "ee255a2c-7c84-4605-aecf-5d299ed886a0",
-    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
-    "amount": 105000,
-    "type": "Purchase",
-    "createdAt": "2024-12-27T14:52:41.622Z"
-  },
-  {
-    "id": "b7a73745-4dd6-433b-a86c-aea98bb20860",
-    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
-    "amount": 105000,
-    "type": "Purchase",
-    "createdAt": "2024-12-27T15:15:17.674Z"
-  },
+
   {
     "id": "8bbf4c9f-9657-4048-a496-9873473a3f21",
     "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",

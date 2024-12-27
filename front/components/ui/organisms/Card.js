@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import Button from '../atoms/Button';
+import { truncateText } from '@/core/utils/hepler';
 
 function Card({ tour }) {
       const { id, title, price, image, options } = tour
@@ -24,8 +25,8 @@ function Card({ tour }) {
                                     <div className="flex text-[1.5rem] text-gray-500">
                                           {options.map((option, index) => (
                                                 <span key={index}>
-                                                      {option}
-                                                      {index < options.length - 1 && <span className='px-[0.5rem]'>-</span>}
+                                                      {truncateText(option, 2)}
+                                                      {/* limit the options words number to keep the size of div */}
                                                 </span>
                                           ))}
                                     </div>

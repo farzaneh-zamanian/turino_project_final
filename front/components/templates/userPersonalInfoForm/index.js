@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { useUpdateUserBankAccount } from "@/core/services/mutations";
 import { personalInformationSchema } from "@/core/schema";
 import EditIcon from "@/public/icons/icons/EditIcon";
-import { DateToIso, flattenObject, getGenderInPersian } from "@/core/utils/hepler";
+import { convertToPersianDate, DateToIso, flattenObject, getGenderInPersian } from "@/core/utils/hepler";
 import Button from "@/components/ui/atoms/Button";
 
 function UserPersonalInfoForm({ data }) {
@@ -121,7 +121,7 @@ function UserPersonalInfoForm({ data }) {
                                     ) : (
                                           <p className="flex justify-between items-center md:gap-5">
                                                 <span className="text-[1.45rem]">تاریخ  </span>
-                                                <span>{birthDate || "-"}</span>
+                                                <span>{convertToPersianDate(birthDate) || "-"}</span>
                                           </p>
                                     )
                               )}
