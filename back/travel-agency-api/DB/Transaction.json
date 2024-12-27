@@ -1,5 +1,4 @@
 [
-
   {
     "id": "6b6a3405-2e95-4d49-bb62-471c82176a6c",
     "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
@@ -28,12 +27,18 @@
     "type": "Purchase",
     "createdAt": "2024-12-27T07:20:25.523Z"
   },
-
   {
     "id": "8bbf4c9f-9657-4048-a496-9873473a3f21",
     "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
     "amount": 35000,
     "type": "Purchase",
     "createdAt": "2024-12-27T16:09:45.976Z"
+  },
+  {
+    "id": "af2518aa-9e18-41af-abcd-e5d09cdc4f75",
+    "userId": "3d442384-71ba-4d85-9726-4d9bb0a6e280",
+    "amount": 105000,
+    "type": "Purchase",
+    "createdAt": "2024-12-27T18:59:34.018Z"
   }
 ]
