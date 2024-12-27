@@ -110,12 +110,24 @@ function calculateDuration(startDate, endDate) {
       return `     ${differenceInDays}روز و ${nights}شب`
 }
 
-function convertToPersianDate(dateString) {
+function convertToPersianDate(dateString, type=null) {
       const persianDate = moment(dateString).locale('fa')
-      .format('HH:mm:ss jYYYY/jM/jD'); 
-      return persianDate;
-    }
-    
+      if (type === "fullDate") {
+            return persianDate.format('HH:mm:ss jYYYY/jM/jD');
+      }
+      else {
+            return persianDate.format('jYYYY/jM/jD');
+
+      }
+
+}
+
+// tour situation 
+export const isTourFinished = (endDate) => {
+      const currentDate = new Date().toISOString();
+      return new Date(endDate) < new Date(currentDate);
+    };
+
 
 
 export {

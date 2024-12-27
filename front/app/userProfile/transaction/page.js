@@ -18,7 +18,7 @@ function UserTransactionsPage() {
         {data?.data?.map(tour => (
           <div className='rounded-b-xl p-[1rem] flex items-center justify-between'>
             <span className='flex-1 text-center'>
-              {convertToPersianDate(tour.createdAt)}
+              {convertToPersianDate(tour.createdAt,"fullDate")}
             </span>
             <span className='flex-1 text-center'>{tour.amount}</span>
             <span className='flex-1 text-center'>101402</span>
