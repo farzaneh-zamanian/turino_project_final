@@ -32,7 +32,6 @@ const useUpdateUserBankAccount = () => {
   const onSuccess = () => {
     queryClient.invalidateQueries({ queryKey: ["user-data"] });
   };
-
   return useMutation({ mutationFn, onSuccess });
 };
 

@@ -25,11 +25,11 @@ function UserProfileLayout({ children }) {
 
       return (
             <AuthProvider>
-                  <div className=' md:mt-[2rem] md:gap-5 md:p-10 md:grid md:grid-cols-4 '>
 
-                        {/* Navigation links */}
-                        <nav className='w-[28.4rem] h-[17rem] md:col-span-1 md:border md:border-1 md:border-borderDivColor md:rounded-2xl ' >
-                              <ul className=' flex flex-row divide-y-2  md:flex-col '>
+                  <div className="container mx-auto py-12">
+                        <div className="grid  grid-cols-1 gap-8 md:grid-cols-4" >
+                              <div className='md:col-span-1  h-fit md:border md:border-borderDivColor  md:rounded-xl '>
+                              <ul className=' flex flex-row  justify-evenly md:divide-y-2  md:flex-col  md:rounded-xl'>
                                     {links.map(({ name, href, icon }) => (
                                           <li key={name} className=' hover:text-primary  transition-default md:hover:bg-accentButtonColor '>
                                                 <Link
@@ -46,10 +46,12 @@ function UserProfileLayout({ children }) {
                                           </li>
                                     ))}
                               </ul>
-                        </nav>
-                        {/* Contents */}
-                        <div className='md:w-full col-span-3 md:flex md:flex-col gap-[2rem]'>{children}</div>
+                              </div>
+                              <div className=' col-span-1  md:col-span-3 md:flex md:flex-col gap-[2rem]'>{children}</div>
+                        </div>
+
                   </div>
+
             </AuthProvider>
 
 

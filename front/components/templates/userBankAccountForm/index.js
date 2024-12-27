@@ -27,6 +27,7 @@ function UserBankAccountForm({ data }) {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(bankAcountSchema),
@@ -41,7 +42,6 @@ function UserBankAccountForm({ data }) {
         onSuccess: (data) => {
           toast.success(data?.data?.message);
           setIsEditing(false); // Exit edit mode on success
-
         },
         onError: (error) => {
           toast.error("مشکلی پیش آمده است مجدد تلاش کنید");
@@ -58,23 +58,29 @@ function UserBankAccountForm({ data }) {
     setValue("debitCard_code", debitCard_code || "");
     setValue("accountIdentifier", accountIdentifier || "");
   };
+  // Function to handle cancel button
+  const handleCancelClick = () => {
+    setIsEditing(false);
+    reset();
+  };
+
 
   const renderInputField = (name, label, maxLength, value) => (
-    <div>
+    <div className=" mb-[1rem]">
       {isEditing ? (
         <input
           {...register(name)}
           placeholder={label}
           maxLength={maxLength}
-          className="md:border md:rounded-[0.5rem] md:p-[0.8rem] w-[25rem] h-[4.5rem]"
+          className="border rounded-[0.5rem] p-[0.8rem] w-full md:w-[25rem] h-[4.5rem] text-left placeholder:text-right"
         />
       ) : (
-        <p className="flex items-center gap-4">
-          <span>{label}</span>
+        <p className="flex md:flex-col md:items-center items-center justify-between ">
+          <span className="text-[1.45rem]">{label}</span>
           <span>{value || "-"}</span>
         </p>
       )}
-      <span className="text-red-600 h-[2rem] p-0">
+      <span className="text-red-600 h-[1rem] p-0 text-[1rem]">
         {!!errors[name] && errors[name].message}
       </span>
     </div>
@@ -83,20 +89,23 @@ function UserBankAccountForm({ data }) {
 
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)} className='flex flex-col border border-borderDivColor rounded-2xl p-[1.5rem] gap-[1rem] md:h-[24rem]'>
-      <h2>اطلاعات حساب بانکی</h2>
-      <div className='flex flex-col md:flex-row md:items-center  *:w-full *:flex *:flex-col md:h-[10rem]'>
+    <form onSubmit={handleSubmit(submitHandler)} className=' mb-8 md:mb-0 grid grid-cols-1  border border-borderDivColor rounded-xl'>
+      <h2 className="text-[1.6rem] leading-[2.48rem] text-primary p-[1rem]">اطلاعات حساب بانکی</h2>
+
+      <div className='flex flex-col p-[1rem] md:flex-row md:items-center  *:w-full *:flex *:flex-col md:h-[10rem]'>
         {renderInputField("shaba_code", "شماره شبا", 26, shaba_code)}
         {renderInputField("debitCard_code", "شماره کارت", 16, debitCard_code)}
         {renderInputField("accountIdentifier", "شماره حساب", 12, accountIdentifier)}
       </div>
 
-      <div className="flex items-center justify-end gap-2 md:border-t md:pt-[2rem]">
+      <div className="border-t p-[1rem] flex justify-end ">
         {isEditing ? (
-          <>
+          <div className=" grid grid-cols-2 gap-4">
+
             <Button label="تایید" status="profileBtn" type="submit" />
-            <Button label="انصراف" status="cancelBtn" onClick={() => setIsEditing(false)} />
-          </>
+            <Button label="انصراف" status="cancelBtn" onClick={handleCancelClick} />
+
+          </div>
         ) : (
           <button type="button" onClick={handleEditClick} className="text-blue-500 flex items-center gap-2">
             <EditIcon />

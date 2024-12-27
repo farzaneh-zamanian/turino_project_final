@@ -41,7 +41,8 @@ function SearchToursForm({ data }) {
       return (
             <section>
                   <form onSubmit={handleSubmit(submitHandler)} className="w-[40rem] md:w-[87.4rem] m-[2rem] md:px-[2rem] md:border md:rounded-full flex flex-col  items-center  md:flex-row">
-                        <div className="flex flex-row items-center justify-between gap-5">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-5">
+                              <div className="md:flex md:items-center">
                               <select defaultValue="" {...register("originId")} className="w-[16rem] h-[4.7rem] m-2 border rounded-2xl md:rounded-none  md:border-l-2 md:border-y-0 md:border-r-0">
                                     <option value="" disabled>مبدا</option>
                                     {/* Render Origin options tag */}
@@ -52,6 +53,8 @@ function SearchToursForm({ data }) {
                                     {/* Render Destination options tag */}
                                     {renderUniqueOptions(data, 'destination')}
                               </select>
+                              </div>
+                     
                               {/* integerate datePicker and react hook form */}
                               <Controller
                                     control={control}
@@ -60,7 +63,7 @@ function SearchToursForm({ data }) {
                                           <DatePicker
                                                 accentColor="#28A745"
                                                 round="x2"
-                                                inputClass="w-[30rem] h-[4.7rem] "
+                                                inputClass="w-[30rem] h-[4.7rem] border rounded-2xl mb-[2rem] md:mb-0 md:border-none "
                                                 onChange={(e) =>
                                                       onChange({
                                                             startDate: DateToIso(e.from),
@@ -71,7 +74,7 @@ function SearchToursForm({ data }) {
                                     )}
                               />
                         </div>
-                        <Button status="search" label="جستجو" type="submit" />
+                        <Button status="search" label="جستجو" type="submit"  />
                   </form>
             </section>
 

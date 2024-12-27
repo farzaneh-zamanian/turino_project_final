@@ -23,6 +23,7 @@ function UserPersonalInfoForm({ data }) {
             handleSubmit,
             control,
             setValue,
+            reset,
             formState: { errors },
       } = useForm({
             resolver: yupResolver(personalInformationSchema),
@@ -41,8 +42,6 @@ function UserPersonalInfoForm({ data }) {
             };
 
             if (isPending) return; // Prevent submission if pending
-
-
             mutate(flattenObject(updatedData), {
                   onSuccess: (response) => {
                         toast.success(response?.data?.message);
@@ -63,6 +62,11 @@ function UserPersonalInfoForm({ data }) {
             setValue("birthDate", birthDate); // Set the birth date
 
       };
+      // Function to handle cancel button
+      const handleCancelClick = () => {
+            setIsEditing(false);
+            reset();
+      };
 
       const renderInputField = (name, label, maxLength, value) => (
             <div>
@@ -71,15 +75,15 @@ function UserPersonalInfoForm({ data }) {
                               {...register(name)}
                               placeholder={label}
                               maxLength={maxLength}
-                              className="md:border md:rounded-[0.5rem] md:p-[0.8rem] w-[25rem] h-[4.5rem]"
+                              className="border rounded-[0.5rem] p-[0.8rem] w-full md:w-[20rem] h-[4.5rem] text-left placeholder:text-right"
                         />
                   ) : (
-                        <p className="flex items-center gap-4">
-                              <span>{label}:</span>
+                        <p className="flex justify-between items-center md:gap-5">
+                              <span className="text-[1.45rem]">{label}</span>
                               <span>{value || "-"}</span>
                         </p>
                   )}
-                  <span className="text-red-600 h-[2rem] p-0">
+                  <span className="text-red-600 h-[1rem] text-[1rem] p-0">
                         {!!errors[name] && errors[name].message}
                   </span>
             </div>
@@ -89,9 +93,9 @@ function UserPersonalInfoForm({ data }) {
 
 
       return (
-            <form onSubmit={handleSubmit(submitHandler)} className='flex flex-col border border-borderDivColor rounded-2xl p-[1.5rem] gap-[1rem] md:h-[28rem]'>
-                  <h2>اطلاعات شخصی</h2>
-                  <div className="flex flex-row flex-wrap item-center justify-between gap-10">
+            <form onSubmit={handleSubmit(submitHandler)} className='grid grid-cols-1  border border-borderDivColor rounded-xl'>
+                  <h2 className="text-[1.6rem] leading-[2.48rem] text-primary p-[1rem]">اطلاعات  شخصی</h2>
+                  <div className='flex flex-col gap-5 p-[1rem]  md:flex-row md:justify-between md:items-center  md:h-[10rem]'>
 
                         {/* name and national code */}
                         {renderInputField("fullName", "نام و نام خانوادگی ", 30, firstName + " " + lastName)}
@@ -107,7 +111,7 @@ function UserPersonalInfoForm({ data }) {
                                           <DatePicker
                                                 accentColor="#28A745"
                                                 round="x2"
-                                                inputClass="w-[25rem] h-[4.5rem] border md:rounded-[0.5rem]"
+                                                inputClass="w-full md:w-[25rem] h-[4.5rem] border md:rounded-[0.5rem]"
                                                 onChange={(e) =>
                                                       onChange({
                                                             birthDate: (DateToIso(e.value)).split('T')[0],
@@ -115,8 +119,8 @@ function UserPersonalInfoForm({ data }) {
 
                                                 } />
                                     ) : (
-                                          <p className="flex items-center gap-4">
-                                                <span>تاریخ : </span>
+                                          <p className="flex justify-between items-center md:gap-5">
+                                                <span className="text-[1.45rem]">تاریخ  </span>
                                                 <span>{birthDate || "-"}</span>
                                           </p>
                                     )
@@ -130,20 +134,24 @@ function UserPersonalInfoForm({ data }) {
                               <option value="" disabled >جنسیت</option>
                               <option value="male">مرد</option>
                               <option value="female">زن</option>
-                        </select>) : (<p className="flex items-center gap-4">
-                              <span>جنسیت : </span>
-                              <span>{getGenderInPersian(gender) || "-"}</span>
-                        </p>)}
+                        </select>) : (
+                                          <p className="flex justify-between items-center md:gap-5">
+                                    <span className="text-[1.45rem]">جنسیت  </span>
+                                    <span>{getGenderInPersian(gender) || "-"}</span>
+                              </p>)
+                        }
 
                   </div>
 
                   {/* button actions */}
-                  <div className="flex items-center justify-end gap-2 md:border-t md:pt-[2rem]">
+                  <div className="border-t p-[1rem] flex justify-end ">
                         {isEditing ? (
-                              <>
+                              <div className=" grid grid-cols-2 gap-4">
+
                                     <Button label="تایید" status="profileBtn" type="submit" />
-                                    <Button label="انصراف" status="cancelBtn" onClick={() => setIsEditing(false)} />
-                              </>
+                                    <Button label="انصراف" status="cancelBtn" onClick={handleCancelClick} />
+
+                              </div>
                         ) : (
                               <button type="button" onClick={handleEditClick} className="text-blue-500 flex items-center gap-2">
                                     <EditIcon />
